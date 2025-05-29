@@ -1,0 +1,33 @@
+[
+    {
+        "title": "Mi título es algo bien largo que no cabe",
+        "imageUrl": "/assets/img/app1.jpg",
+        "icon": "game",
+        "href": "/customers",
+        "bigColumn": 1
+    },
+    {
+        "title": "Mi título es algo bien largo que no cabe",
+        "imageUrl": "/assets/img/app2.jpg",
+        "icon": "game",
+        "href": "/customers"
+    },
+    {
+        "title": "Mi título es algo bien largo que no cabe",
+        "imageUrl": "/assets/img/app3.jpg",
+        "icon": "game",
+        "href": "/customers"
+    },
+    {
+        "title": "Mi título es algo bien largo que no cabe",
+        "imageUrl": "/assets/img/app4.jpg",
+        "icon": "game",
+        "href": "/customers"
+    },
+    {
+        "title": "Mi título es algo bien largo que no cabe",
+        "imageUrl": "/assets/img/app5.jpg",
+        "icon": "game",
+        "href": "/customers"
+    }
+]

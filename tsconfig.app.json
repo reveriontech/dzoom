@@ -1,0 +1,18 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app"
+  },
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": [
+    "src/app/views/imagiation/*.ts",
+    "src/app/views/gcp/*.ts",
+    "src/app/views/call/*.ts",
+    "src/app/views/home/*.ts",
+    "src/app/views/flowchart/*.ts",
+    "src/app/views/nogales/*.ts",
+    "src/app/views/assessment/*.ts",
+    "src/app/views/guides/*.ts"
+  ]
+}

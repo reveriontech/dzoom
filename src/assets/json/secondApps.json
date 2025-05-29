@@ -1,0 +1,32 @@
+[
+    {
+        "title": "Simple",
+        "imageUrl": "/assets/img/app1.jpg",
+        "icon": "game",
+        "href": "/customers"
+    },
+    {
+        "title": "Simple",
+        "imageUrl": "/assets/img/app2.jpg",
+        "icon": "game",
+        "href": "/customers"
+    },
+    {
+        "title": "Simple",
+        "imageUrl": "/assets/img/app3.jpg",
+        "icon": "game",
+        "href": "/customers"
+    },
+    {
+        "title": "Simple",
+        "imageUrl": "/assets/img/app4.jpg",
+        "icon": "game",
+        "href": "/customers"
+    },
+    {
+        "title": "Simple",
+        "imageUrl": "/assets/img/app5.jpg",
+        "icon": "game",
+        "href": "/customers"
+    }
+]

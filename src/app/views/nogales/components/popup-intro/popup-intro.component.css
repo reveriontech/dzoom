@@ -1,0 +1,20 @@
+.bottom_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding: 16px;
+    gap: 16px;
+}
+
+app-room-intro {
+    max-width: 680px;
+    display: block;
+}
+
+header {
+    display: flex;
+}
+
+header span {
+    flex: 1;
+}

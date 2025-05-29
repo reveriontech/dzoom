@@ -1,0 +1,41 @@
+.container_vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.container_horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.container_fit {
+    width: 100%;
+    height: 100%;
+}
+
+.tamanio_letra {
+    font-size: 0.9em;
+}
+
+.fill {
+    flex: 1;
+}
+
+.center_content {
+    display: flex;
+    align-items: center;
+}
+
+.border_radius {
+    border-radius: 5px;
+}
+
+.icon_red {
+    color: red;
+}
+
+.icon_green {
+    color: rgb(82, 136, 0);
+}

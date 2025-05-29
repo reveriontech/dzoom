@@ -1,0 +1,37 @@
+<div class="overlay_container">
+    <div class="top_menu">
+        <img class="icon_indicator enhance_icon" [ngClass]="{'on': sharedState.micState, 'off': !sharedState.micState}"
+            (click)="toggleMicState()" [src]="micIconPath" />
+        <img class="icon_indicator enhance_icon" [ngClass]="{'on': !sharedState.micState, 'off': sharedState.micState}"
+            (click)="toggleMicState()" src="{{ getRoot() }}assets/img/mic/mic_off_white.svg" />
+
+        <mat-icon class="icon_indicator enhance_icon"
+            [ngClass]="{'on': sharedState.videoState, 'off': !sharedState.videoState}" (click)="toggleVideoState()">
+            videocam</mat-icon>
+        <mat-icon class="enhance_icon icon_indicator red"
+            [ngClass]="{'on': !sharedState.videoState, 'off': sharedState.videoState}" (click)="toggleVideoState()">
+            videocam_off</mat-icon>
+
+        <mat-icon *ngIf="showMenuThreeDots !== false" class="enhance_icon icon_indicator pull_left"
+            (click)="openDeviceConfigPopUp()">
+            more_vert</mat-icon>
+    </div>
+
+    <div class="bottom_menu">
+        <div class="button_bottons_choices" *ngIf="state != 'none'">
+            <div class="button_bottons_choice"
+                [ngClass]="{'selected': [inMemoryState.currentDevices.audio, inMemoryState.currentDevices.video].indexOf(choice.id) >= 0}"
+                *ngFor="let choice of deviceChoices" (click)="selectDevice(choice)">{{
+                choice.txt }}
+            </div>
+        </div>
+        <div class="button_bottons_menu" *ngIf="state == 'none'">
+            <mat-icon *ngIf="hasMultipleMicrophones()" class="enhance_icon icon_indicator"
+                (click)="letSelectMicrophone()">
+                settings_voice</mat-icon>
+            <mat-icon *ngIf="hasMultipleCameras()" class="enhance_icon icon_indicator" (click)="letSelectCamera()">
+                cameraswitch
+            </mat-icon>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   enable-background="new 0 0 24 24"
+   height="24"
+   viewBox="0 0 24 24"
+   width="24"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="nmic_toggle.svg"
+   inkscape:version="1.3.1 (9b9bdc1480, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="25.337993"
+     inkscape:cx="13.14232"
+     inkscape:cy="11.405797"
+     inkscape:window-width="1860"
+     inkscape:window-height="1055"
+     inkscape:window-x="60"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g4" />
+  <g
+     id="g1">
+    <path
+       d="M0,0h24v24H0V0z"
+       fill="none"
+       id="path1" />
+  </g>
+  <g
+     id="g5">
+    <g
+       id="g4">
+      <path
+         d="M8.57,0.51l4.48,4.48V2.04c4.72,0.47,8.48,4.23,8.95,8.95c0,0,2,0,2,0C23.34,3.02,15.49-1.59,8.57,0.51z"
+         id="path3"
+         style="fill:#000000;fill-opacity:1" />
+      <path
+         d="M10.95,21.96C6.23,21.49,2.47,17.73,2,13.01c0,0-2,0-2,0c0.66,7.97,8.51,12.58,15.43,10.48l-4.48-4.48V21.96z"
+         id="path4"
+         style="fill:#000000;fill-opacity:1" />
+      <path
+         d="m 16.982413,11.516871 c 0,-0.303558 -0.244456,-0.548018 -0.548015,-0.548018 -0.303557,0 -0.548017,0.24446 -0.548017,0.548018 0,1.880446 -1.719267,3.408982 -3.833426,3.408982 -2.1141617,0 -3.8334297,-1.528536 -3.8334297,-3.408982 0,-0.303558 -0.2444567,-0.548018 -0.5480147,-0.548018 -0.303558,0 -0.5480171,0.24446 -0.5480171,0.548018 0,2.315637 1.9207431,4.228321 4.3814425,4.478151 v 1.544654 h -0.633977 c -0.303558,0 -0.548019,0.244457 -0.548019,0.548014 0,0.303559 0.244461,0.548018 0.548019,0.548018 h 2.363989 c 0.30356,0 0.548018,-0.244459 0.548018,-0.548018 0,-0.303557 -0.244458,-0.548014 -0.548018,-0.548014 h -0.633977 v -1.544654 c 2.460699,-0.24983 4.381442,-2.162514 4.381442,-4.478151 z"
+         id="path1-6"
+         style="fill:#000000;fill-opacity:1;stroke-width:0.0268635" />
+      <path
+         d="m 11.999915,13.807974 c 1.370039,0 2.479504,-1.109464 2.479504,-2.479504 V 7.8926227 c 0,-1.3700406 -1.109465,-2.4795042 -2.479504,-2.4795042 -1.370042,0 -2.4795067,1.1094636 -2.4795067,2.4795042 V 11.32847 c 0,1.37004 1.1094647,2.479504 2.4795067,2.479504 z"
+         id="path2"
+         style="fill:#000000;fill-opacity:1;stroke-width:0.0268635"
+         sodipodi:nodetypes="sssssss" />
+    </g>
+  </g>
+</svg>

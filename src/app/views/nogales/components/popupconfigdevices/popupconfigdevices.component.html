@@ -1,0 +1,48 @@
+<div mat-dialog-title>
+    <header>
+        <span>Su Configuración</span>
+        <mat-icon class="peque manito" (click)="cancel()">close</mat-icon>
+    </header>
+</div>
+<mat-dialog-content class="mat-typography container_popup">
+    <div class="video_container">
+        <video autoplay muted class="local_video mirrored" #local_video></video>
+    </div>
+    <div class="controls_container">
+        <div class="one_control">
+            <span class="label">Cámara</span>
+            <select class="select_class" [(ngModel)]="inMemoryState.currentDevices.video"
+                (ngModelChange)="updateSelectedDevice()">
+                <option *ngFor="let c of inMemoryState.devices.videos" [ngValue]="c.id">{{c.txt}}</option>
+            </select>
+            <div class="extra">
+                <mat-icon *ngIf="sharedState.videoState" (click)="toggleVideoState()">videocam</mat-icon>
+                <mat-icon *ngIf="!sharedState.videoState" (click)="toggleVideoState()">videocam_off</mat-icon>
+            </div>
+        </div>
+        <div class="one_control">
+            <span class="label">Micrófono</span>
+            <select class="select_class" [(ngModel)]="inMemoryState.currentDevices.audio"
+                (ngModelChange)="updateSelectedDevice()">
+                <option *ngFor="let c of inMemoryState.devices.audios" [ngValue]="c.id">{{c.txt}}</option>
+            </select>
+            <div class="extra">
+                <img class="mic_icon" *ngIf="sharedState.micState" (click)="toggleMicState()" [src]="micIconPath" />
+                <img class="mic_icon" *ngIf="!sharedState.micState" (click)="toggleMicState()"
+                    src="{{ getRoot() }}assets/img/mic/mic_off.svg" />
+            </div>
+        </div>
+        <div class="one_control">
+            <span class="label">Altavoces</span>
+            <select class="select_class" [(ngModel)]="inMemoryState.currentDevices.speaker"
+                (ngModelChange)="updateSelectedSpeaker()">
+                <option *ngFor="let c of inMemoryState.devices.speaker" [ngValue]="c.id">{{c.txt}}</option>
+            </select>
+            <audio loop volume="0.3" class="invisible" src="{{ getRoot() }}assets/sounds/accepted.mp3" #sample_audio></audio>
+            <div class="extra">
+                <mat-icon *ngIf="!sampleIsPlaying" (click)="startSampleSound()">play_arrow</mat-icon>
+                <mat-icon *ngIf="sampleIsPlaying" (click)="stopSampleSound()">stop</mat-icon>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

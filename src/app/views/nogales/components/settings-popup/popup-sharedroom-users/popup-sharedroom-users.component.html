@@ -1,0 +1,46 @@
+<div mat-dialog-title>
+    <header>
+        <mat-icon class="peque">person_add</mat-icon>
+        <span>{{ "room.base.settings.tabs.clinic.section.popup.users.title" | translate:'nogales' | async
+            }}</span>
+        <mat-icon class="peque manito" (click)="cancel()">close</mat-icon>
+    </header>
+</div>
+<mat-dialog-content class="mat-typography container_popup">
+    <form class="form-container layout_columna border_bottom" [formGroup]="form">
+        <mat-form-field class="form-control">
+            <mat-label>{{ "room.base.settings.tabs.clinic.section.user_permission.search" | translate:'nogales' | async
+                }}</mat-label>
+            <input matInput formControlName="search" type="text" (keyup.enter)="loadPrivateUsers(true)" />
+            <button matSuffix mat-icon-button (click)="loadPrivateUsers(true)">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ "room.base.settings.tabs.clinic.section.user_permission.table.user" |
+                        translate:'nogales' | async }}</th>
+                    <th>{{ "room.base.settings.tabs.clinic.section.user_permission.table.email" |
+                        translate:'nogales' | async }}</th>
+                    <th>{{ "room.base.settings.tabs.clinic.section.user_permission.table.access" |
+                        translate:'nogales' | async }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of getUsers()">
+                    <td>{{ "enum.title." + user.title | translate:'nogales' | async }} {{ user.name }}{{
+                        user.middle_name ? ' '+user.middle_name : '' }}{{
+                        user.last_name ? ' '+user.last_name : '' }}</td>
+                    <td>{{ user.user_id }}</td>
+                    <td><mat-slide-toggle [(ngModel)]="user.permission_granted" [ngModelOptions]="{standalone: true}"
+                            (toggleChange)="updatePrivatePermission(user)"></mat-slide-toggle></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</mat-dialog-content>
+<div class="bottom_buttons">
+    <app-pagination #shared_user_pagination [list]="users" [(page)]="pagination.page" [(pageSize)]="pagination.limit"
+        (pageSizeChange)="loadPrivateUsers(true)" (next)="loadPrivateUsers(false)" [lang]="'nogales'"></app-pagination>
+</div>

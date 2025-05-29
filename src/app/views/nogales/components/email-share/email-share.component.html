@@ -1,0 +1,64 @@
+<div mat-dialog-title>
+    <header>
+        <mat-icon class="peque">email</mat-icon>
+        <span>{{ "room.mail.title" | translate:'nogales' | async }}</span>
+        <mat-icon class="peque manito" (click)="cancel()">close</mat-icon>
+    </header>
+</div>
+<mat-dialog-content class="mat-typography container_popup">
+    <form class="form-container layout_columna border_bottom" [formGroup]="form">
+        <mat-form-field class="form-control">
+            <mat-label>{{ "room.mail.subject" | translate:'nogales' | async }}</mat-label>
+            <input matInput formControlName="recipients" type="text" required />
+            <mat-error *ngIf="recipients?.hasError('required')">
+                {{ "room.mail.subject_required" | translate:'nogales' | async }}
+            </mat-error>
+            <mat-error *ngIf="recipients?.hasError('invalidEmail')">
+                {{ "room.mail.subject_invalid" | translate:'nogales' | async }}
+                {{recipients?.getError('invalidEmail').value}}
+            </mat-error>
+            <mat-error *ngIf="recipients?.hasError('maxEmails')">
+                {{ "room.mail.subject_limit" | translate:'nogales' | async }}
+                {{recipients?.getError('maxEmails').value}}
+            </mat-error>
+        </mat-form-field>
+        <app-select-room class="full" [roomGroups]="roomGroups" [myOwnPath]="myOwnPath"
+            (roomChange)="roomChange($event)" [selectedPath]="selectedPath"></app-select-room>
+        <div class="date_time_container">
+            <mat-form-field class="date_picker">
+                <mat-label>{{ "room.mail.date" | translate:'nogales' | async }}</mat-label>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker #picker></mat-datepicker>
+                <input matInput [matDatepicker]="picker" formControlName="date" [min]="minDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>{{ "room.mail.time" | translate:'nogales' | async }}</mat-label>
+                <input class="time_picker_input" matInput [ngxTimepicker]="timepicker" formControlName="time">
+                <mat-icon class="manito" matSuffix (click)="deleteDateTime()">close</mat-icon>
+                <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+            </mat-form-field>
+        </div>
+        <mat-form-field>
+            <mat-label>{{ "room.mail.language" | translate:'nogales' | async }}</mat-label>
+            <select matNativeControl formControlName="language">
+                <option *ngFor="let selectedLanguage of languages" [ngValue]="selectedLanguage.id">
+                    {{selectedLanguage.txt}}</option>
+            </select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{ "room.mail.text" | translate:'nogales' | async }}</mat-label>
+            <textarea matInput cdkTextareaAutosize formControlName="invitation" #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="5" cdkAutosizeMaxRows="5"></textarea>
+            <p [innerHtml]="renderingData.below"></p>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<div class="bottom_buttons">
+    <button class="button_general button_primary_inverse" mat-raised-button color="" (click)="cancel()" type="button">
+        {{ "room.mail.btn_cancel" | translate:'nogales' | async }}
+    </button>
+    <button class="button_general button_primary" mat-raised-button color="primary" (click)="sendMessage()">
+        {{ "room.mail.btn_send" | translate:'nogales' | async }}
+    </button>
+</div>

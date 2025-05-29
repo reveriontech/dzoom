@@ -1,0 +1,139 @@
+<div class="contenedor_horizontal padding_10" *ngIf="edit">
+    <p class="contenedor_horizontal centrado_ortho like_link" (click)="goBack()"><mat-icon>arrow_back</mat-icon>
+        {{ "room.base.back" | translate:'nogales' | async }}</p>
+</div>
+<div class="contenedor_horizontal padding_10" *ngIf="edit">
+    <div class="contenedor_vertical gap full like_panel">
+        <h1>{{ "room.base.edit_intro.instruction" | translate:'nogales':{type:getTypeName(), room: roomName } | async }}
+        </h1>
+        <hr />
+        <div class="contenedor_horizontal end gap">
+            <button *ngIf="roomName != 'default'" class="button_general button_primary_inverse" mat-raised-button
+                color="" (click)="delete.emit()" type="button">
+                <span>{{ "room.base.edit_intro.set_default" | translate:'nogales' | async }}</span>
+            </button>
+            <button [disabled]="!isChanged" class="button_general button_primary" mat-raised-button color="primary"
+                (click)="save.emit()" type="button">
+                <span>{{ "button.save" | translate:'nogales' | async }}</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="contenedor_horizontal padding_10">
+    <div class="contenedor_vertical gap full">
+        <div *ngIf="edit">
+            <div class="single_card control" *ngIf="currentChooseTypeRow !== 0" (click)="chooseTypeOfCard(0)">
+                <mat-icon>add</mat-icon>
+            </div>
+            <div class="single_card contenedor_horizontal centrado_same centrado_ortho gap"
+                *ngIf="currentChooseTypeRow === 0" (click)="chooseTypeOfCard(0)">
+                <div class="contenedor_vertical centrado_ortho like_card" (click)="addCardAt(0, 'text')">
+                    <mat-icon>edit_note</mat-icon>
+                    <span>{{ "room.base.edit_intro.option.text" | translate:'nogales' | async }}</span>
+                </div>
+                <div class="contenedor_vertical centrado_ortho like_card" (click)="addCardAt(0, 'image')">
+                    <mat-icon>landscape</mat-icon>
+                    <span>{{ "room.base.edit_intro.option.image" | translate:'nogales' | async }}</span>
+                </div>
+                <div class="contenedor_vertical centrado_ortho like_card" (click)="addCardAt(0, 'video')">
+                    <mat-icon>smart_display</mat-icon>
+                    <span>{{ "room.base.edit_intro.option.video" | translate:'nogales' | async }}</span>
+                </div>
+                <div class="circled_button" (click)="chooseTypeOfCard(null)">
+                    <mat-icon>close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let card of list; index as i;" class="super_card">
+            <div class="single_card content" *ngIf="card.type=='image'">
+                <!--img *ngIf="card.value !== null" [src]="card.value" /-->
+                <app-imagepicker [options]="imageOptions" (eventSave)="changedImage($event, i)" [url]="getPageImage(i)">
+                </app-imagepicker>
+                <div *ngIf="card.value !== null && edit" class="content_controls fix_image contenedor_horizontal gap">
+                    <mat-icon *ngIf="i!=0" (click)="moveCard(i, false)">arrow_upward</mat-icon>
+                    <mat-icon *ngIf="i!=list.length - 1" (click)="moveCard(i, true)">arrow_downward</mat-icon>
+                    <mat-icon (click)="eraseCard(i)">delete</mat-icon>
+                </div>
+            </div>
+            <div class="single_card content contenedor_vertical gap" *ngIf="card.type=='text'">
+                <p *ngIf="!textEditors[i]" [innerHTML]="card.value"></p>
+                <div *ngIf="!!textEditors[i]" class="NgxEditor__Wrapper">
+                    <ngx-editor-menu [toolbar]="toolbar" [editor]="textEditors[i]"> </ngx-editor-menu>
+                    <ngx-editor [editor]="textEditors[i]" [(ngModel)]="textModels[i]" [disabled]="false"
+                        [placeholder]="'Type here...'"></ngx-editor>
+                </div>
+                <div *ngIf="!!textEditors[i] && edit" class="contenedor_horizontal gap end">
+                    <button class="button_general button_primary_inverse" mat-raised-button color=""
+                        (click)="goBackToChoice(i)" type="button">
+                        <mat-icon>close</mat-icon>
+                        <span>{{ "button.cancel" | translate:'nogales' | async }}</span>
+                    </button>
+                    <button class="button_general button_primary_inverse" mat-raised-button color=""
+                        (click)="applyText(i)" type="button">
+                        <mat-icon>check</mat-icon>
+                        <span>{{ "button.apply" | translate:'nogales' | async }}</span>
+                    </button>
+                </div>
+                <div *ngIf="!textEditors[i] && edit" class="content_controls contenedor_horizontal gap">
+                    <mat-icon (click)="editText(i)">edit</mat-icon>
+                    <mat-icon *ngIf="i!=0" (click)="moveCard(i, false)">arrow_upward</mat-icon>
+                    <mat-icon *ngIf="i!=list.length - 1" (click)="moveCard(i, true)">arrow_downward</mat-icon>
+                    <mat-icon (click)="eraseCard(i)">delete</mat-icon>
+                </div>
+            </div>
+            <div class="single_card content" *ngIf="card.type=='video'"
+                [ngClass]="{'proportional': card.value !== null}">
+                <div *ngIf="card.value === null" class="contenedor_horizontal">
+                    <form class="contenedor_vertical full gap padding_10_both" [formGroup]="forms[i]">
+                        <mat-form-field class="form-control">
+                            <mat-label>Video url</mat-label>
+                            <input matInput formControlName="videoUrl" type="text" />
+                        </mat-form-field>
+                        <div class="contenedor_horizontal gap end">
+                            <button class="button_general button_primary_inverse" mat-raised-button color=""
+                                (click)="goBackToChoice(i)" type="button">
+                                <mat-icon>close</mat-icon>
+                                <span>{{ "button.cancel" | translate:'nogales' | async }}</span>
+                            </button>
+                            <button class="button_general button_primary_inverse" mat-raised-button color=""
+                                (click)="applyVideo(i)" type="button">
+                                <mat-icon>check</mat-icon>
+                                <span>{{ "button.apply" | translate:'nogales' | async }}</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <iframe *ngIf="card.value !== null" [src]="card.value" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div *ngIf="card.value !== null && edit" class="content_controls contenedor_horizontal gap">
+                    <mat-icon *ngIf="i!=0" (click)="moveCard(i, false)">arrow_upward</mat-icon>
+                    <mat-icon *ngIf="i!=list.length - 1" (click)="moveCard(i, true)">arrow_downward</mat-icon>
+                    <mat-icon (click)="eraseCard(i)">delete</mat-icon>
+                </div>
+            </div>
+            <div class="single_card control margin_control" *ngIf="edit && currentChooseTypeRow !== i+1"
+                (click)="chooseTypeOfCard(i+1)">
+                <mat-icon>add</mat-icon>
+            </div>
+            <div class="single_card margin_control contenedor_horizontal centrado_same centrado_ortho gap"
+                *ngIf="edit && currentChooseTypeRow === i+1" (click)="chooseTypeOfCard(i+1)">
+                <div class="contenedor_vertical centrado_ortho like_card" (click)="addCardAt(i+1, 'text')">
+                    <mat-icon>edit_note</mat-icon>
+                    <span>{{ "room.base.edit_intro.option.text" | translate:'nogales' | async }}</span>
+                </div>
+                <div class="contenedor_vertical centrado_ortho like_card" (click)="addCardAt(i+1, 'image')">
+                    <mat-icon>landscape</mat-icon>
+                    <span>{{ "room.base.edit_intro.option.image" | translate:'nogales' | async }}</span>
+                </div>
+                <div class="contenedor_vertical centrado_ortho like_card" (click)="addCardAt(i+1, 'video')">
+                    <mat-icon>smart_display</mat-icon>
+                    <span>{{ "room.base.edit_intro.option.video" | translate:'nogales' | async }}</span>
+                </div>
+                <div class="circled_button" (click)="chooseTypeOfCard(null)">
+                    <mat-icon>close</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

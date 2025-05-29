@@ -1,0 +1,25 @@
+<div *ngIf="people">
+    <div class="patient-queue-item"
+        *ngFor="let person of people | keyvalue | sortByName:'name':'asc'; trackBy: trackById; index as i">
+        <div class="patient-queue-item__data" *ngIf="person.value.type == 'provider'">
+            <div class="patient-queue-item__box">
+                <div class="patient-queue-item__img">
+                    <img class="patient-queue-item__img-value" src="{{ getRoot() }}assets/img/avatar.svg" />
+                </div>
+            </div>
+            <div class="patient-queue-item__box patient-queue-item__box--data">
+                <div class="patient-queue-item__description">
+                    <div class="patient-queue-item__name"> {{ person.value.name }}</div>
+                </div>
+            </div>
+            <div class="patient-queue-item__box">
+                <div class="patient-queue-item__time--warning manito" (click)="connectToRoom(person)">
+                    <span [innerHtml]="getMissedMessagesCount(person.key)"></span>
+                </div>
+            </div>
+            <div class="patient-queue-item__box manito" (click)="connectToRoom(person)">
+                <mat-icon>message</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

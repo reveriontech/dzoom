@@ -1,0 +1,28 @@
+FROM --platform=linux/x86_64 node:20
+
+RUN apt-get update && apt-get install wget -y
+RUN apt-get install -y openssh-server
+
+RUN mkdir -p /tmp/app
+
+WORKDIR /tmp/app
+COPY . ./
+# Remove unwanted files
+RUN rm /tmp/app/package-lock.json
+# Remove unwanted folders
+RUN rm -rf /tmp/app/node_modules
+RUN rm -rf /tmp/app/dist
+RUN rm -rf /tmp/app/.git
+RUN rm -rf /tmp/app/.angular
+# Install dependencies
+RUN npm install --omit=dev
+
+RUN mkdir /var/run/sshd
+RUN echo 'root:root123' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+EXPOSE 22
+EXPOSE 8080
+EXPOSE 8081
+
+CMD ["sh", "/tmp/app/run.sh"]

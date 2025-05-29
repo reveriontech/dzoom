@@ -1,0 +1,179 @@
+<div class="main_container">
+    <div class="fallback_container" *ngIf="fallbackError!==null">
+        <div *ngIf="fallbackError=='NO_DEVICE'">
+            <p>No camera or microphone found</p>
+        </div>
+        <div *ngIf="fallbackError=='PERMISSION'">
+            <p>Please grant permissions for camera and microphone <!--permission type="camera microphone">Grant!
+                </permission-->
+            </p>
+        </div>
+        <div *ngIf="fallbackError=='UNKNOWN'">
+            <p>Technical error {{ fallbackErrorDetail }}</p>
+        </div>
+    </div>
+    <div class="top_menu_container" [ngClass]="{'invisible': isShowingVideoCall}">
+        <div class="top_menu">
+            <div>
+                <mat-icon (click)="toggleLeftMenu()">account_circle</mat-icon>
+            </div>
+            <div class="middle"></div>
+            <div class="manito" (click)="connectWithOwnProvider()" *ngIf="isOwnProviderConnected()">
+                <mat-icon>message</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="body_content" [ngClass]="{'incall': isShowingVideoCall}">
+        <div class="sidebar_wrapper" [ngClass]="{'closed': !stateToggleLeftMenu}">
+            <div class="sidebar__data">
+                <div class="sidebar__box__logo">
+                    <img src="{{ getRoot() }}assets/logo/logo006.png">
+                </div>
+                <div class="sidebar__box__main">
+                    <div class="sidebar__category" *ngIf="isUserInAllGroup(['apps_videocall_provider'])">
+                        <p class="sidebar__title">{{ "room.left.patient_queue_connected" | translate:'nogales' | async
+                            }}</p>
+                        <app-patient-queue-list [people]="filterPatients(true)" [inCallView]="true"
+                            [getMissedMessagesCount]="getMissedMessagesCountThis"
+                            (connectToRoomNamedAs)="connectToRoomNamedAs($event)" (endCallAction)="endCallWith($event)">
+                        </app-patient-queue-list>
+                    </div>
+                    <div class="sidebar__category" *ngIf="isUserInAllGroup(['apps_videocall_provider'])">
+                        <p class="sidebar__title">{{ "room.left.patient_queue" | translate:'nogales' | async }}</p>
+                        <app-patient-queue-list [people]="filterPatients(false)" [inCallView]="false"
+                            [getMissedMessagesCount]="getMissedMessagesCountThis"
+                            (connectToRoomNamedAs)="connectToRoomNamedAs($event)" (startCallAction)="startCall($event)">
+                        </app-patient-queue-list>
+                    </div>
+                    <!--div class="sidebar__category" *ngIf="currentUser != null">
+                        <p class="sidebar__title">{{ "room.left.general" | translate:'nogales' | async }}</p>
+                    </div-->
+                    <div class="sidebar__category" *ngIf="currentUser == null">
+                        <p class="sidebar__title">{{ "room.left.available" | translate:'nogales' | async }}</p>
+                        <app-doctor-list [people]="livemodelPublic.data?.people"
+                            [getMissedMessagesCount]="getMissedMessagesCountThis"
+                            (connectToRoomNamedAs)="connectToRoomNamedAs($event)"></app-doctor-list>
+                    </div>
+                    <div class="sidebar_footer" *ngIf="currentUser != null">
+                        <div class="menu_icon_user_parent manito" [matMenuTriggerFor]="mainMenu"
+                            aria-label="Menú principal">
+                            <div class="profile_img_container">
+                                <img [src]="avatarImage">
+                            </div>
+                            <span *ngIf="!currentUser">{{ "room.left.my_account" | translate:'nogales' | async }}</span>
+                            <span *ngIf="!!currentUser">{{ currentUser.name }}</span>
+                        </div>
+                        <mat-menu #mainMenu="matMenu">
+                            <button mat-menu-item (click)="logout()">
+                                <mat-icon>logout</mat-icon>
+                                <span>{{ "room.left.logout" | translate:'nogales' | async }}</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_room_container">
+            <app-video-call [ngClass]="{'incall': isShowingVideoCall}" (stopCallAction)="stopCall()"
+                (toggleLeftMenuEvent)="toggleLeftMenu($event)" [stateToggleLeftMenu]="stateToggleLeftMenu"
+                [currentUser]="currentUser" [sharedState]="sharedState" [inMemoryState]="inMemoryState"
+                [videoManager]="videoManager" (isInCall)="isInCall($event)" [isChatOpen]="isChatOpen">
+            </app-video-call>
+            <div class="content_no_video_call" id="content_no_video_call">
+                <div class="content_room" [ngClass]="{'invisible': isShowingVideoCall}">
+                    <app-room-intro *ngIf="myLocalUserDataPublic.type !== 'provider'" [edit]="false"
+                        [list]="topIntro.list" class="only_big_screen"></app-room-intro>
+                    <app-account-dashboard
+                        *ngIf="myLocalUserDataPublic.type == 'provider' && [null, 'selecting'].indexOf(viewState) >= 0"
+                        [roomGroups]="roomGroups" [currentUser]="currentUser" [myOwnPath]="myOwnPath"
+                        [(selectedPath)]="selectedPath" (selectedPathChange)="checkChanges()"></app-account-dashboard>
+                    <div class="panel_edit_intro contenedor_vertical" *ngIf="myLocalUserDataPublic.type === 'provider'">
+                        <div class="panel_edit_intro contenedor_horizontal padding_15 gap_15" *ngIf="viewState==null">
+                            <div class="contenedor_vertical like_card center" (click)="selectView('selecting')"
+                                *ngIf="isUserInSomeGroup(['apps_videocall_admin'])">
+                                <mat-icon>edit</mat-icon>
+                                <span>{{ "room.base.edit_intro.button" | translate:'nogales' | async }}</span>
+                            </div>
+                            <div class="contenedor_vertical like_card center" (click)="selectView('settings-profile')"
+                                *ngIf="isUserInSomeGroup(['apps_videocall_provider'])">
+                                <mat-icon>settings</mat-icon>
+                                <span>{{ "room.base.settings.button" | translate:'nogales' | async }}</span>
+                            </div>
+                        </div>
+                        <div class="panel_edit_intro contenedor_horizontal padding_15 gap_15"
+                            *ngIf="viewState=='selecting'">
+                            <div class="contenedor_vertical like_card center" (click)="loadEditIntro('top')">
+                                <mat-icon>vertical_align_top</mat-icon>
+                                <span>{{ "room.base.edit_intro.top" | translate:'nogales' | async }}</span>
+                            </div>
+                            <div class="contenedor_vertical like_card center" (click)="loadEditIntro('bottom')">
+                                <mat-icon>vertical_align_bottom</mat-icon>
+                                <span>{{ "room.base.edit_intro.bottom" | translate:'nogales' | async }}</span>
+                            </div>
+                            <div class="contenedor_vertical like_card center" (click)="loadEditIntro('popup')">
+                                <mat-icon>library_books</mat-icon>
+                                <span>{{ "room.base.edit_intro.popup" | translate:'nogales' | async }}</span>
+                            </div>
+                            <div class="circled_button" (click)="setViewState({name: null})">
+                                <mat-icon>close</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <app-room-intro *ngIf="myLocalUserDataPublic.type !== 'provider'" [edit]="false"
+                        [list]="bottomIntro.list"></app-room-intro>
+                    <app-room-intro #introEditor
+                        *ngIf="myLocalUserDataPublic.type === 'provider' && editableIntro!=null && viewState=='edit'"
+                        [edit]="true" [list]="editableIntro" (cancel)="setViewState({name: null})"
+                        (save)="saveEditIntro()" (delete)="deleteIntro()" [type]="editIntroType"
+                        [roomName]="selectedPath" (changed)="introChanged($event)"
+                        [isChanged]="mementoChanged"></app-room-intro>
+                    <app-room-settings *ngIf="viewState!==null && viewState.startsWith('settings-')"
+                        [tabState]="viewState" (stateChange)="setViewState($event)"></app-room-settings>
+                    <!--pre>Public conection state: {{ connectionStatePublic }}</pre-->
+                    <!--pre>Chat conection state: {{ connectionState }}</pre-->
+                    <!--pre>{{ livemodelPublic.data?.people | json }}</pre-->
+                    <!--pre *ngIf="videoCallComponent">{{ videoCallComponent.livemodel | json }}</pre-->
+                    <!--pre>{{ myLocalUserDataPublic | json }}</pre-->
+                    <!--pre>{{ selectedPath }}</pre-->
+                </div>
+                <div class="minivideo" [ngClass]="{'invisible': inMemoryState.stream == null || isShowingVideoCall}">
+                    <div class="mini_video_container">
+                        <video autoplay muted class="local_video mirrored" #local_video></video>
+                        <app-topcontrol [sharedState]="sharedState" [inMemoryState]="inMemoryState"
+                            [videoManager]="videoManager">
+                        </app-topcontrol>
+                    </div>
+                    <div *ngIf="currentUser == null" class="infopanel">
+                        <p>
+                            <span class="panel_provider_name" *ngIf="sharedState.provider">{{ getClinicicianName()
+                                }}</span>
+                        </p>
+                        <!--div>
+                    <div class="provider_status_container" [ngClass]="[sharedState.providerState]">
+                        <span [ngClass]="[sharedState.providerState]" class="provider_status">{{
+                            "room.panelright.state."+sharedState.providerState
+                            | translate:'nogales' |
+                            async }}</span>
+                    </div>
+                </div-->
+                        <div>
+                            <span class="provider_detail">
+                                {{ "room.panelright.detail."+sharedState.providerState | translate:'nogales' |
+                                async }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content_room only_small_screen" [ngClass]="{'invisible': isShowingVideoCall}">
+                    <app-room-intro *ngIf="myLocalUserDataPublic.type !== 'provider'" [edit]="false"
+                        [list]="topIntro.list"></app-room-intro>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-textchat *ngIf="connectionState == 'online'" (sendMessage)="sendMessage($event)" [socketId]="socketId"
+        [roomName]="builderConfig.roomName" [currentUserUID]="currentUserUID" [people]="livemodelPublic.data?.people"
+        [chatSetSawProcessor]="chatSetSawProcessorThis" [connectionState]="connectionState" [isOpened]="isChatOpen"
+        (closeRoom)="closeRoom()" (toggleOpenCloseChat)="toggleOpenCloseChat()" [messages]="livemodel.data?.chat">
+    </app-textchat>
+</div>

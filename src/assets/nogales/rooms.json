@@ -1,0 +1,57 @@
+[
+    {
+        "path": "default",
+        "title": "default",
+        "shared": true
+    },
+    {
+        "path": "private",
+        "title": "private",
+        "shared": true
+    },
+    {
+        "path": "casacheckin",
+        "title": "casacheckin",
+        "shared": true
+    },
+    {
+        "path": "interview",
+        "title": "interview",
+        "shared": true
+    },
+    {
+        "path": "med",
+        "title": "med",
+        "shared": true
+    },
+    {
+        "path": "nogalescounseling",
+        "title": "nogalescounseling",
+        "shared": true
+    },
+    {
+        "path": "nogalesgrp",
+        "title": "nogalesgrp",
+        "shared": true
+    },
+    {
+        "path": "nogalespsych",
+        "title": "nogalespsych",
+        "shared": true
+    },
+    {
+        "path": "npc",
+        "title": "npc",
+        "shared": true
+    },
+    {
+        "path": "ssmed",
+        "title": "ssmed",
+        "shared": true
+    },
+    {
+        "path": "testingroom",
+        "title": "testingroom",
+        "shared": true
+    }
+]

@@ -1,0 +1,48 @@
+<div *ngIf="people">
+    <div class="patient-queue-item"
+        *ngFor="let person of people | keyvalue | sortByName:'since':'asc'; trackBy: trackById; index as i">
+        <div class="patient-queue-item__data" *ngIf="person.value.type == 'patient' && person.value.configured">
+            <div class="patient-queue-item__box">
+                <div class="patient-queue-item__status">
+                </div>
+                <div class="patient-queue-item__img">
+                    <img class="patient-queue-item__img-value" src="{{ getRoot() }}assets/img/avatar.svg" />
+                </div>
+            </div>
+            <div class="patient-queue-item__box patient-queue-item__box--data">
+                <div class="patient-queue-item__description esconder">
+                    <div class="patient-queue-item__name"> {{ person.value.name }}</div>
+                    <div class="patient-queue-item__room"> /{{ person.value.roomName }} {{ person.value.since |
+                        since:'nogales':counter | async }}</div>
+                </div>
+                <div class="patient-queue-item__button-wrapper verflex">
+                    <button *ngIf="!inCallView" class="patient-queue-item__call-button manito"
+                        (click)="startCallWith(person.key, person.value)">{{ "room.left.start_call" |
+                        translate:'nogales' | async }}</button>
+                    <button *ngIf="!!inCallView" class="patient-queue-item__call-button manito red_button"
+                        (click)="endCallWith(person.key, person.value)">{{ "room.left.end_call_with" |
+                        translate:'nogales' | async }}</button>
+                    <button class="patient-queue-item__actions-button manito" [matMenuTriggerFor]="patientMenu">
+                        <mat-icon class="peque">more_vert</mat-icon>
+                    </button>
+                    <mat-menu #patientMenu="matMenu" class="patient_detail_panel" backdropClass="patient_detail_panel">
+                        <app-patient-detail [patient]="person.value" [uuid]="person.key" [counter]="counter"
+                            (videoCallEvent)="startCallWith($event.key, $event.value)"
+                            (connectToRoomEvent)="connectToRoom($event)"></app-patient-detail>
+                    </mat-menu>
+                    <div class="patient-queue-item__time--warning counter_extra" (click)="connectToRoom(person.key)">
+                        <span class="manito" [innerHtml]="getMissedMessagesCount(person.key)"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-queue-item__box esconder">
+                <div class="patient-queue-item__time--warning">
+                    <span [innerHtml]="getMissedMessagesCount(person.key)"></span>
+                </div>
+            </div>
+            <!--div class="patient-queue-item__box manito">
+                <mat-icon class="peque">more_vert</mat-icon>
+            </div-->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+.controls {
+  display: flex;
+}
+
+.controls .full {
+  flex: 1;
+}
+
+.controls button.button_general {
+  font-size: 14px;
+  height: 56px;
+}
+
+button.button_copy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+button.button_copy mat-icon.when_copied {
+  display: none;
+}
+
+button.button_copy mat-icon.when_not_copied {
+  display: initial;
+}
+
+button.button_copy.copied {
+  padding-top: 7px;
+}
+
+button.button_copy.copied mat-icon.when_copied {
+  display: initial;
+}
+
+button.button_copy.copied mat-icon.when_not_copied {
+  display: none;
+}

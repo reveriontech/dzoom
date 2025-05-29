@@ -1,0 +1,7 @@
+<div class="container_horizontal">
+    <div class="some_tab" [ngClass]="{'active': stateId == tab.id}" *ngFor="let tab of states" (click)="selectTab(tab)">
+        <div *ngIf="!!tab.lang" class="small_tab">{{ tab.lang | translate:'nogales' | async }}</div>
+        <div *ngIf="!tab.lang" class="small_tab">{{ tab.name }}</div>
+    </div>
+    <div class="some_tab fill"></div>
+</div>

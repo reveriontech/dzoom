@@ -1,0 +1,27 @@
+.video-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.local_video {
+  bottom: 10px;
+  position: absolute;
+  width: 400px;
+  right: 10px;
+}
+
+.remote_video {
+  width: 400px;
+}
+
+.peer_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.one_peer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,87 @@
+.overlay_container {
+  position: absolute;
+  top: 5px;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+}
+
+.top_menu {
+  position: relative;
+}
+
+.top_menu .pull_left {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.top_menu,
+.button_bottons_menu {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+
+.top_menu .icon_indicator,
+.bottom_menu .icon_indicator {
+  color: white;
+  cursor: pointer;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.top_menu .icon_indicator:hover,
+.bottom_menu .icon_indicator:hover {
+  color: lightgray;
+}
+
+.icon_indicator.off {
+  display: none;
+}
+
+.top_menu mat-icon.icon_indicator.red {
+  color: red;
+}
+
+.bottom_menu {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.button_bottons_menu {
+  width: 100%;
+}
+
+.button_bottons_choices {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.button_bottons_choice {
+  background-color: white;
+  padding: 3px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.button_bottons_choice.selected {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.button_bottons_choice:hover {
+  background-color: lightgray;
+}
+
+.enhance_icon {
+  background-color: #0000006b;
+  border-radius: 100%;
+  padding: 2px;
+}

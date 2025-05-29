@@ -1,0 +1,78 @@
+.component_vertical1 {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  height: auto !important;
+  flex-direction: column;
+  justify-content: space-between;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: var(--institution-background-image);
+  background-color: #f4f6f5;
+}
+
+.top_container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 15px;
+}
+
+.middle_container {
+  display: flex;
+  justify-content: center;
+  padding: 18px 15px;
+}
+
+.middle_container2 {
+  display: flex;
+  max-width: 570px;
+  min-height: 266px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.middle_container_left {
+  position: relative;
+  width: 190px;
+  height: 100%;
+  border-radius: 4px 0 0 4px;
+}
+
+.middle_container_right {
+  width: 380px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 0 4px 4px 0;
+}
+
+.middle_container_right p {
+  margin: 0 0 17px;
+}
+
+.button_enter {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+.button_login {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+.footer_container {
+  display: flex;
+  justify-content: center;
+  padding: 18px 15px;
+}
+
+@media (max-width: 600px) {
+  .middle_container2 {
+    flex-direction: column;
+  }
+}

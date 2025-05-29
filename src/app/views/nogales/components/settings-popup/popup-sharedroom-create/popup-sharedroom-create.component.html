@@ -1,0 +1,34 @@
+<div mat-dialog-title>
+    <header>
+        <mat-icon class="peque">{{ create ? "add" : "settings" }}</mat-icon>
+        <span *ngIf="!!create">{{ "room.base.settings.tabs.clinic.section.popup.create.title" | translate:'nogales' |
+            async }}</span>
+        <span *ngIf="!create">{{ "room.base.settings.tabs.clinic.section.popup.create.title2" | translate:'nogales' |
+            async }}</span>
+        <mat-icon class="peque manito" (click)="cancel()">close</mat-icon>
+    </header>
+</div>
+<mat-dialog-content class="mat-typography container_popup">
+    <form class="form-container layout_columna border_bottom" [formGroup]="form">
+        <mat-form-field class="form-control">
+            <mat-label>{{ "room.base.settings.tabs.clinic.section.popup.create.field.name" | translate:'nogales' | async
+                }}</mat-label>
+            <input matInput formControlName="name" type="text" required />
+        </mat-form-field>
+        <mat-form-field class="form-control">
+            <mat-label>{{ "room.base.settings.tabs.clinic.section.popup.create.field.title" | translate:'nogales' |
+                async }}</mat-label>
+            <input matInput formControlName="title" type="text" required />
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<div class="bottom_buttons">
+    <button class="button_general button_primary_inverse" mat-raised-button color="" (click)="cancel()" type="button">
+        {{ "button.cancel" | translate:'nogales' | async }}
+        <mat-icon class="peque">close</mat-icon>
+    </button>
+    <button class="button_general button_primary" mat-raised-button color="primary" (click)="accept()">
+        {{ "button.accept" | translate:'nogales' | async }}
+        <mat-icon class="peque">check</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,52 @@
+[mat-dialog-title] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+[mat-dialog-title] header {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.25rem;
+  line-height: 1.5625rem;
+  padding: 16px 0;
+  border-bottom: 1px solid lightgray;
+  gap: 15px;
+}
+
+[mat-dialog-title] header span {
+  flex: 1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid lightgray;
+  gap: 15px;
+}
+
+.bottom_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  padding: 16px;
+  gap: 16px;
+}
+
+.border_bottom {
+  padding: 0 16px 16px 16px;
+}
+
+.date_time_container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.date_time_container mat-form-field {
+  flex: 1;
+}
+
+.time_picker_input {
+  min-height: 40px;
+}

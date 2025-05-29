@@ -1,0 +1,25 @@
+<div class="dashboard-invite-form">
+    <div class="dashboard-invite-form__header">
+        <h2 class="dashboard-invite-form__title">{{ "room.base.welcome" | translate:'nogales' | async }}</h2>
+        <p class="dashboard-invite-form__description">{{ "room.base.invite_expl" | translate:'nogales' | async }}</p>
+        <div class="controls">
+            <app-select-room class="full" [roomGroups]="roomGroups" [myOwnPath]="myOwnPath"
+                (roomChange)="roomChange($event)" [selectedPath]="selectedPath"></app-select-room>
+            <button class="button_general button_primary_inverse button_chanel" mat-button
+                [matMenuTriggerFor]="menuChanel">
+                <span>{{ "room.base.invite" | translate:'nogales' | async }}</span>
+                <mat-icon class="peque">expand_more</mat-icon>
+            </button>
+            <mat-menu #menuChanel="matMenu">
+                <button mat-menu-item>
+                    <mat-icon class="peque">sms</mat-icon>
+                    <span>{{ "room.base.sms" | translate:'nogales' | async }}</span>
+                </button>
+                <button mat-menu-item (click)="openSendEmailPopUp()">
+                    <mat-icon class="peque">email</mat-icon>
+                    <span>{{ "room.base.email" | translate:'nogales' | async }}</span>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+.contenedor_horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor_horizontal.end {
+    justify-content: end;
+}
+
+.contenedor_vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.full {
+    flex: 1;
+}
+
+.gap {
+    gap: 15px;
+}
+
+.padding_10 {
+    padding: 10px 0;
+}
+
+.padding_10_both {
+    padding: 10px;
+}
+
+.single_card {
+    border-radius: 5px;
+}
+
+.single_card img,
+.single_card p,
+.single_card form {
+    max-width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(194, 194, 194);
+    background-color: white;
+}
+
+.single_card img {
+    min-width: 100%;
+}
+
+.single_card p {
+    min-height: 44px;
+    margin-bottom: 0;
+}
+
+.single_card.proportional {
+    position: relative;
+    padding-bottom: 57%;
+    height: 0;
+}
+
+.single_card.proportional iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.single_card p {
+    padding: 10px;
+    font-size: 1.5em;
+    line-height: 1.2em;
+    color: #515151;
+    text-align: justify;
+}
+
+.NgxEditor__Wrapper {
+    font-size: 1.5em;
+}
+
+.single_card.control {
+    text-align: center;
+    padding: 20px 0;
+    border: 2px dashed #b2b2b2;
+    cursor: pointer;
+    color: #b2b2b2;
+}
+
+.single_card.control:hover {
+    border: 2px dashed black;
+    color: black;
+}
+
+.super_card .single_card.margin_control {
+    margin-top: 10px;
+}
+
+.contenedor_vertical.centrado_ortho,
+.contenedor_horizontal.centrado_ortho {
+    align-items: center;
+}
+
+.contenedor_vertical.centrado_same,
+.contenedor_horizontal.centrado_same {
+    justify-content: center;
+}
+
+.contenedor_horizontal.centrado_ortho {
+    align-items: center;
+}
+
+.contenedor_vertical.like_card {
+    border-radius: 5px;
+    border: 2px solid #b2b2b2;
+    color: #b2b2b2;
+    gap: 5px;
+    min-width: 100px;
+    background: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.contenedor_vertical.like_card:hover {
+    background: rgb(228, 228, 228);
+    color: black;
+}
+
+.circled_button {
+    border: 2px solid #b2b2b2;
+    color: #b2b2b2;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.circled_button:hover {
+    border: 2px solid black;
+    color: black;
+}
+
+.single_card.content {
+    position: relative;
+}
+
+.single_card.content .content_controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    padding: 20px;
+    gap: 20px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 1px solid rgb(194, 194, 194);
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.single_card.content .content_controls:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.single_card.content .content_controls mat-icon {
+    font-size: 2em;
+    color: #b2b2b2;
+    cursor: pointer;
+}
+
+.single_card.content .content_controls mat-icon:hover {
+    color: black;
+}
+
+.single_card.content .content_controls.fix_image {
+    z-index: 3;
+}
+
+app-imagepicker {
+    display: block;
+}
+
+.like_panel {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.like_link {
+    color: gray;
+    cursor: pointer;
+}
+
+.like_link:hover {
+    color: black;
+}

@@ -1,0 +1,13 @@
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+}
+
+.bottom_buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 10px;
+}

@@ -1,0 +1,11 @@
+<div class="contenedor_horizontal padding_10">
+    <p class="contenedor_horizontal centrado_ortho like_link" (click)="goBack()"><mat-icon>arrow_back</mat-icon>
+        {{ "room.base.back" | translate:'nogales' | async }}</p>
+</div>
+<div class="contenedor_horizontal">
+    <app-simple-tab [states]="tabOptions" [stateId]="tabState" (stateIdChange)="changeTab($event)"></app-simple-tab>
+</div>
+<div class="contenedor_horizontal detail_container">
+    <app-settings-profile *ngIf="tabState=='settings-profile'"></app-settings-profile>
+    <app-settings-clinic *ngIf="tabState=='settings-clinic'"></app-settings-clinic>
+</div>

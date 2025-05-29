@@ -1,0 +1,31 @@
+<mat-dialog-content class="mat-typography container_popup">
+    <div class="izquierda">
+        <form>
+            <header>
+                <span>{{ "room.popup1.welcome" | translate:'nogales' | async }}</span>
+            </header>
+            <p class="guide">
+                <span>{{ "room.popup1.guide" | translate:'nogales':self | async }}</span>
+            </p>
+            <div class="input_container">
+                <input type="text" class="nogales_input_form full_width"
+                    placeholder="{{ 'room.popup1.inputplaceholder' | translate:'nogales' | async }}" matInput
+                    [formControl]="myControl" required>
+            </div>
+            <mat-error class="nogales_error" *ngIf="myControl.dirty && myControl.hasError('required')">{{
+                "room.popup1.errors.name_required" | translate:'nogales':self | async }}</mat-error>
+            <mat-error class="nogales_error" *ngIf="myControl.dirty && myControl.hasError('maxlength')">{{
+                "room.popup1.errors.max_name_length" | translate:'nogales':self | async }}</mat-error>
+            <button class="button_general button_primary button_enter" class="button_general button_primary"
+                [disabled]="!patientHasName()" (click)="continue()">{{
+                "room.popup1.cta"
+                | translate:'nogales' | async }}</button>
+        </form>
+    </div>
+    <div class="derecha">
+        <video autoplay muted class="local_video mirrored" #local_video></video>
+        <app-topcontrol [sharedState]="sharedState" [inMemoryState]="inMemoryState" [videoManager]="videoManager"
+            [showMenuThreeDots]="showMenuThreeDots">
+        </app-topcontrol>
+    </div>
+</mat-dialog-content>

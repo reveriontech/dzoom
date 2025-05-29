@@ -1,0 +1,8 @@
+<app-home [currentUser]="currentUser" *ngIf="currentView == 'welcome'"></app-home>
+<app-waitingroom class="nogales_full_screen" [livemodelPublic]="livemodel" [currentUser]="currentUser"
+    [socketIdPublic]="socketId" [currentUserUID]="currentUserUID" [connectionStatePublic]="connectionState"
+    [myLocalUserDataPublic]="myLocalUserData" (updateMyInformationEvent)="updateMyInformation($event)"
+    (updateMyPhotoEvent)="updateMyPhoto($event.bytes)" (openVideoChat)="openVideoChat($event)"
+    (closeVideoChat)="closeVideoChat($event)"
+    [avatarImage]="getCurrentSrcImage()" *ngIf="currentView == 'room'">
+</app-waitingroom>

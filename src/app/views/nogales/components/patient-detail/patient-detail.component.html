@@ -1,0 +1,45 @@
+<div class="container_fit padding_15 container_vertical tamanio_letra">
+    <div class="top_detail container_horizontal fill">
+        <div class="">
+            <img [src]="getImageUrl()" class="border_radius">
+        </div>
+        <div class="container_vertical fill">
+            <div class="top_detail container_horizontal">
+                <mat-icon class="peque">mic</mat-icon> <mat-icon *ngIf="patient.micGranted"
+                    class="peque icon_green">check</mat-icon><mat-icon *ngIf="!patient.micGranted"
+                    class="peque icon_red">close</mat-icon>
+                <mat-icon class="peque">videocam</mat-icon> <mat-icon *ngIf="patient.cameraGranted"
+                    class="peque icon_green">check</mat-icon><mat-icon *ngIf="!patient.cameraGranted"
+                    class="peque icon_red">close</mat-icon>
+            </div>
+            <div class="top_detail container_horizontal">
+                Since: <strong>{{ patient.since | since:'nogales':counter | async }}</strong> in <strong>/{{ patient.roomName }}</strong>
+            </div>
+            <div class="top_detail container_horizontal">
+                From: <strong>{{ patient.country }} / {{ patient.city }}</strong>
+            </div>
+            <div class="top_detail container_horizontal">
+                <div class="top_detail container_horizontal fill">
+                    Device: <mat-icon *ngIf="patient.deviceType=='desktop'" class="peque">laptop_chromebook</mat-icon>
+                    <mat-icon *ngIf="patient.deviceType=='mobile'" class="peque">phone_iphone</mat-icon>
+                </div>
+                <div class="top_detail container_horizontal fill">
+                    OS: <strong>{{ patient.osName }}</strong>
+                </div>
+            </div>
+            <div class="top_detail container_horizontal">
+                Browser: <strong>{{ patient.browserName }}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="button_bottons container_horizontal">
+        <button class="button_general button_primary center_content" (click)="connectToRoom()">
+            <mat-icon class="peque">chat</mat-icon>
+            <span>Chat</span>
+        </button>
+        <button class="button_general button_primary center_content" (click)="videoCall()">
+            <mat-icon class="peque">videocam</mat-icon>
+            <span>Call</span>
+        </button>
+    </div>
+</div>

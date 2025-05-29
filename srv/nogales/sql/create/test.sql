@@ -1,0 +1,1 @@
+SELECT NOW() as example, '${other}' as other

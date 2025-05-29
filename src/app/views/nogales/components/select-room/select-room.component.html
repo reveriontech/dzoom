@@ -1,0 +1,17 @@
+<form class="controls">
+    <mat-form-field class="full">
+        <mat-label>{{ "room.base.room" | translate:'nogales' | async }}</mat-label>
+        <mat-select [formControl]="roomSelectControl">
+            <mat-optgroup [label]="group.name" *ngFor="let group of roomGroups" [disabled]="group.disabled">
+                <mat-option [value]="rooms.value" *ngFor="let rooms of group.rooms">
+                    /{{rooms.value}}</mat-option>
+            </mat-optgroup>
+        </mat-select>
+    </mat-form-field>
+    <button class="button_general button_primary button_copy" [ngClass]="copiedState"
+        (click)="copyCurrentUrlToClipboard()">
+        <mat-icon class="peque when_copied">done</mat-icon>
+        <mat-icon class="peque when_not_copied">content_copy</mat-icon>
+        <span>{{ "room.base.copy" | translate:'nogales' | async }}</span>
+    </button>
+</form>

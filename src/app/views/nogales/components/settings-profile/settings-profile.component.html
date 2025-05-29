@@ -1,0 +1,76 @@
+<mat-accordion>
+    <mat-expansion-panel (opened)="updateState('personal', true)" (closed)="updateState('', false)">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{ "room.base.settings.tabs.profile.section.personal.title" | translate:'nogales' | async
+                }}</mat-panel-title>
+            <mat-panel-description>{{ "room.base.settings.tabs.profile.section.personal.instruction" |
+                translate:'nogales' | async }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+            <form class="form-container layout_columna border_bottom" [formGroup]="formPersonal">
+                <mat-form-field>
+                    <mat-label>{{ "room.base.settings.tabs.profile.section.personal.field.title" | translate:'nogales' |
+                        async }}</mat-label>
+                    <select matNativeControl formControlName="title">
+                        <option *ngFor="let title of titles" [ngValue]="title.id">
+                            {{ 'enum.title.'+title.id | translate:'nogales' | async}}</option>
+                    </select>
+                </mat-form-field>
+                <mat-form-field class="form-control">
+                    <mat-label>{{ "room.base.settings.tabs.profile.section.personal.field.name" | translate:'nogales' |
+                        async }}</mat-label>
+                    <input matInput formControlName="name" type="text" required />
+                </mat-form-field>
+                <mat-form-field class="form-control">
+                    <mat-label>{{ "room.base.settings.tabs.profile.section.personal.field.middle_name" |
+                        translate:'nogales' | async }}</mat-label>
+                    <input matInput formControlName="middleName" type="text" />
+                </mat-form-field>
+                <mat-form-field class="form-control">
+                    <mat-label>{{ "room.base.settings.tabs.profile.section.personal.field.last" | translate:'nogales' |
+                        async }}</mat-label>
+                    <input matInput formControlName="lastName" type="text" required />
+                </mat-form-field>
+                <div class="bottom_buttons">
+                    <button class="button_general button_primary_inverse" mat-raised-button color="" (click)="cancel()"
+                        type="button">
+                        {{ "button.cancel" | translate:'nogales' | async }}
+                    </button>
+                    <button class="button_general button_primary" mat-raised-button color="primary"
+                        (click)="savePersonalInformation()">
+                        {{ "button.save" | translate:'nogales' | async }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="updateState('professional', true)" (closed)="updateState('', false)">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{ "room.base.settings.tabs.profile.section.professional.title" | translate:'nogales' |
+                async }}</mat-panel-title>
+            <mat-panel-description>{{ "room.base.settings.tabs.profile.section.professional.instruction" |
+                translate:'nogales' |
+                async }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+            <form class="form-container layout_columna border_bottom" [formGroup]="formProfessional">
+                <mat-form-field class="form-control">
+                    <mat-label>{{ "room.base.settings.tabs.profile.section.professional.field.title" |
+                        translate:'nogales' |
+                        async }}</mat-label>
+                    <input matInput formControlName="jobTitle" type="text" />
+                </mat-form-field>
+                <div class="bottom_buttons">
+                    <button class="button_general button_primary_inverse" mat-raised-button color="" (click)="cancel()"
+                        type="button">
+                        {{ "button.cancel" | translate:'nogales' | async }}
+                    </button>
+                    <button class="button_general button_primary" mat-raised-button color="primary"
+                        (click)="saveProfessionalInformation()">
+                        {{ "button.save" | translate:'nogales' | async }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

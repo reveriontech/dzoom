@@ -1,0 +1,45 @@
+.pagination_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.pagination_container .center_container {
+    flex: 1;
+}
+
+.call_to_action {
+    text-decoration: underline;
+    color: rgb(0, 0, 88);
+    cursor: pointer;
+}
+
+.call_to_action.disabled {
+    text-decoration: none;
+    cursor: default;
+    color: black;
+}
+
+.call_to_action:hover {
+    color: blue;
+}
+
+.call_to_action.disabled:hover {
+    color: black;
+}
+
+.row_aligned {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.center_container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
+
+.gap {
+    min-width: 10px;
+}

@@ -1,0 +1,22 @@
+<div class="pagination_container">
+    <div class="previous_container row_aligned call_to_action" [ngClass]="{'disabled': page == 0}"
+        (click)="previousAction()">
+        <mat-icon>chevron_left</mat-icon>
+        <span>{{ "pagination.button.previous" | translate:lang | async }}</span>
+    </div>
+    <div class="center_container">
+        <span>{{ "pagination.button.page_size" | translate:lang | async }}:&nbsp;</span>
+        <select [(ngModel)]="pageSize" (ngModelChange)="updatePageSize()">
+            <option *ngFor="let c of pagingOptions" [ngValue]="c.id">{{c.txt}}</option>
+        </select>
+    </div>
+    <div class="center_container">
+        <div class="call_to_action" *ngFor="let num of getPages()" [ngClass]="{'disabled': page == num}"
+            (click)="goToPage(num)">{{ num + 1 }}
+        </div>
+    </div>
+    <div class="next_container row_aligned call_to_action" (click)="nextAction()">
+        <span>{{ "pagination.button.next" | translate:lang | async }}</span>
+        <mat-icon>chevron_right</mat-icon>
+    </div>
+</div>

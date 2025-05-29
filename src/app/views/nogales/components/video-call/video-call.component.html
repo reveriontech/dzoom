@@ -1,0 +1,133 @@
+<div class="full_screen on_top" *ngIf="displayVideoCall"
+    [ngClass]="{'vertical': stateToggleViewOrientation, 'horizontal': !stateToggleViewOrientation}">
+    <div class="side_container">
+        <div class="one_peer">
+            <!--This is my own camera-->
+            <video autoplay muted class="local_video mirrored" #local_video></video>
+            <div class="overlay_peer"
+                [ngClass]="{'active': socketId && livemodel?.data?.people[socketId]?.sharedState.voice}">
+                <div class="relleno relativo">
+                    <app-topcontrol [sharedState]="sharedState" [inMemoryState]="inMemoryState"
+                        [videoManager]="videoManager" (stateChanged)="updateMyLiveModel()" [showMenuThreeDots]="true"
+                        (sourceChanged)="sourceChanged()">
+                    </app-topcontrol>
+                    <!--The user does not need to remember his own name...-->
+                    <!--p *ngIf="socketId" class="peer_name white_subtitle noselect">{{
+                        livemodel?.data?.people[socketId]?.sharedState.name }}</p-->
+                </div>
+                <div class="overlay_peer_2">
+                    <img *ngIf="numPeople > 2 && isProvider() && socketId && !(livemodel?.data?.selectedPeer == livemodel?.data?.people[socketId]?.sharedState.uuid)"
+                        class="enhance_icon icon_indicator" src="{{ getRoot() }}assets/img/keep/keep_off.svg"
+                        (click)="placePeerOnFront(livemodel?.data?.people[socketId]?.sharedState.uuid)" />
+                    <img *ngIf="numPeople > 2 && isProvider() && socketId && !!(livemodel?.data?.selectedPeer == livemodel?.data?.people[socketId]?.sharedState.uuid)"
+                        src="{{ getRoot() }}assets/img/keep/keep.svg" (click)="placePeerOnFront(null)"
+                        class="enhance_icon icon_indicator" />
+                </div>
+            </div>
+        </div>
+        <!--Those are the peers video stream-->
+        <div *ngFor="let socketIdL of userList" class="one_peer" [ngClass]="{'invisible': socketIdL == socketId}">
+            <video autoplay class="remote_video mirrored" #remote_video [attr.data-socket-id]="socketIdL"
+                *ngIf="socketIdL !== socketId"></video>
+            <audio controls [ngInit]="initPeerHtmlElementsThis" #remote_audio [attr.data-socket-id]="socketIdL"
+                *ngIf="socketIdL !== socketId"></audio>
+            <div class="overlay_peer" [ngClass]="{'active': livemodel?.data?.people[socketIdL]?.sharedState.voice}">
+                <div class="relleno others">
+                    <p class="peer_name white_subtitle noselect">{{ livemodel?.data?.people[socketIdL]?.sharedState.name
+                        }}</p>
+                </div>
+                <div class="overlay_peer_2">
+                    <img *ngIf="!!livemodel?.data?.people[socketIdL]?.sharedState.micState"
+                        class="icon_indicator enhance_icon" src="{{ getRoot() }}assets/img/mic/mic_0.svg"
+                        (click)="muteAudioPeer(socketIdL)" />
+                    <img *ngIf="!livemodel?.data?.people[socketIdL]?.sharedState.micState"
+                        class="icon_indicator enhance_icon" src="{{ getRoot() }}assets/img/mic/mic_off_white.svg" />
+
+                    <mat-icon *ngIf="!!livemodel?.data?.people[socketIdL]?.sharedState.videoState"
+                        class="icon_indicator enhance_icon" (click)="muteVideoPeer(socketIdL)">
+                        videocam</mat-icon>
+                    <mat-icon *ngIf="!livemodel?.data?.people[socketIdL]?.sharedState.videoState"
+                        class="enhance_icon icon_indicator red">
+                        videocam_off</mat-icon>
+                    <img *ngIf="numPeople > 2 && isProvider() && !(livemodel?.data?.selectedPeer == livemodel?.data?.people[socketIdL]?.sharedState.uuid)"
+                        class="enhance_icon icon_indicator" src="{{ getRoot() }}assets/img/keep/keep_off.svg"
+                        (click)="placePeerOnFront(livemodel?.data?.people[socketIdL]?.sharedState.uuid)" />
+                    <img *ngIf="numPeople > 2 && isProvider() && !!(livemodel?.data?.selectedPeer == livemodel?.data?.people[socketIdL]?.sharedState.uuid)"
+                        src="{{ getRoot() }}assets/img/keep/keep.svg" (click)="placePeerOnFront(null)"
+                        class="enhance_icon icon_indicator" />
+                </div>
+            </div>
+            <!--div class="debug_log">
+                <pre class="white_subtitle">Others: {{ socketIdL | json }}</pre>
+            </div-->
+        </div>
+    </div>
+    <div class="main_container" #main_container>
+        <div class="video-container">
+            <video [ngStyle]="centerVideoStyle" #center_video [ngInit]="adjustViewThis" autoplay
+                class="mirrored"></video>
+        </div>
+        <div class="video_center_label white_subtitle" *ngIf="mainCenterVideoSocketId">
+            {{ livemodel?.data?.people[mainCenterVideoSocketId]?.sharedState.name }}
+        </div>
+        <div class="debug_log">
+            <!--pre class="white_subtitle">Connection: {{ conectionWatcherBool | json }}</pre>
+            <pre class="white_subtitle">Stream: {{ streamWatcherBool | json }}</pre>
+            <pre class="white_subtitle">{{ livemodel | json }}</pre-->
+            <!--pre class="white_subtitle">Volumes: {{ volumes | json }}</pre-->
+            <!--pre class="white_subtitle">lastSocketIdVoiceOn: {{ lastSocketIdVoiceOn | json }}</pre-->
+        </div>
+    </div>
+    <div class="bottom_controls">
+        <div class="left_bottoms">
+            <button *ngIf="!!stateToggleLeftMenu" mat-raised-button (click)="toggleLeftMenu()" type="button">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            <button *ngIf="!stateToggleLeftMenu" mat-raised-button (click)="toggleLeftMenu()" type="button">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+        <div class="center_buttons_1">
+            <div class="center_buttons">
+                <button mat-raised-button (click)="toggleMicState()" type="button" class="">
+                    <img class="icon_indicator" [ngClass]="{'on': sharedState.micState, 'off': !sharedState.micState}"
+                        src="{{ getRoot() }}assets/img/mic/nmic_0.svg" />
+                    <img class="icon_indicator" [ngClass]="{'on': !sharedState.micState, 'off': sharedState.micState}"
+                        src="{{ getRoot() }}assets/img/mic/mic_off.svg" />
+                </button>
+                <button mat-raised-button (click)="toggleVideoState()" type="button" class="">
+                    <mat-icon class="icon_indicator"
+                        [ngClass]="{'on': sharedState.videoState, 'off': !sharedState.videoState}">videocam</mat-icon>
+                    <mat-icon class="icon_indicator red"
+                        [ngClass]="{'on': !sharedState.videoState, 'off': sharedState.videoState}">videocam_off
+                    </mat-icon>
+                </button>
+                <!--button mat-raised-button (click)="fixAllConnections(true)" type="button" class="">
+                    <mat-icon>shuffle</mat-icon>
+                </button-->
+                <button mat-raised-button (click)="stopCall()" type="button" class="red">
+                    <mat-icon>call_end</mat-icon>
+                </button>
+            </div>
+            <div class="right_buttoms" [ngInit]="autoConfigureThis">
+                <button *ngIf="!!stateToggleViewOrientation" mat-raised-button color=""
+                    (click)="toggleViewOrientation()" type="button">
+                    <mat-icon>horizontal_distribute</mat-icon>
+                </button>
+                <button *ngIf="!stateToggleViewOrientation" mat-raised-button color="" (click)="toggleViewOrientation()"
+                    type="button">
+                    <mat-icon>vertical_distribute</mat-icon>
+                </button>
+
+                <button *ngIf="!!stateToggleFullScreen" mat-raised-button color="" (click)="toggleFullScreen()"
+                    type="button">
+                    <mat-icon>fullscreen_exit</mat-icon>
+                </button>
+                <button *ngIf="!stateToggleFullScreen" mat-raised-button color="" (click)="toggleFullScreen()"
+                    type="button">
+                    <mat-icon>fullscreen</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

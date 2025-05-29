@@ -1,0 +1,225 @@
+{
+    "home": {
+        "loginbutton": "Inicio de sesión del proveedor",
+        "guide": "Ingresa el nombre de la habitación de tu médico:",
+        "inputplaceholder": "¿Con quién te reunirás acá?",
+        "guidebutton": "Entrar a la sala",
+        "logout": "Cerrar sesión"
+    },
+    "room": {
+        "popup1": {
+            "welcome": "¡Bienvenido!",
+            "guide": "Ahora verifica para informar a ${sharedState.provider.title} ${sharedState.provider.name} ${sharedState.provider.lastname} que estás aquí",
+            "inputplaceholder": "Escribe tu nombre y apellido",
+            "cta": "Registrarse",
+            "errors": {
+                "name_required": "El campo es requerido",
+                "max_name_length": "El nombre debe tener menos de ${MAX_USERNAME_LENGTH} caracteres"
+            }
+        },
+        "left": {
+            "patient_queue": "PACIENTES EN ESPERA",
+            "patient_queue_connected": "PACIENTES EN LLAMADA",
+            "general": "GENERAL",
+            "available": "DISPONIBLE",
+            "my_account": "Mi cuenta",
+            "logout": "Cerrar sesión",
+            "start_call": "Iniciar llamada",
+            "end_call_with": "Terminar llamada"
+        },
+        "panelright": {
+            "state": {
+                "off": "FUERA DE LINEA",
+                "on": "DISPONIBLE"
+            },
+            "detail": {
+                "off": "Tu llamada comenzará pronto",
+                "on": "Tu llamada comenzará pronto"
+            }
+        },
+        "base": {
+            "welcome": "Bienvenido",
+            "invite_expl": "Comparte el enlace para envitar a alguien a la sala de espera:",
+            "invite": "Invitar usando",
+            "sms": "Mensaje de texto",
+            "email": "Correo",
+            "copy": "Copiar",
+            "room": "Sala",
+            "back": "Regresar al inicio",
+            "edit_intro": {
+                "button": "Editar introducción",
+                "top": "Introducción superior",
+                "bottom": "Introducción inferior",
+                "popup": "Introducción emergente",
+                "instruction": "Editar sección ${type} de la sala /${room}",
+                "set_default": "Usar contenido predefinido",
+                "option": {
+                    "type_here": "Escriba aquí",
+                    "text": "Texto",
+                    "image": "Imagen",
+                    "video": "Video"
+                },
+                "alerts": {
+                    "default_warn": {
+                        "title": "Atención",
+                        "txt": "El contenido actual será borrado y reemplazado por el predefinido. Desea continuar?"
+                    },
+                    "": {
+                        "title": "Seguro?",
+                        "txt": "El contenido será borrado"
+                    }
+                }
+            },
+            "settings": {
+                "button": "Configuración",
+                "tabs": {
+                    "profile": {
+                        "title": "Perfil",
+                        "section": {
+                            "personal": {
+                                "title": "Información personal",
+                                "instruction": "Edite su información personal",
+                                "field": {
+                                    "title": "Título",
+                                    "name": "Nombre",
+                                    "middle_name": "Segundo nombre",
+                                    "last": "Apellido"
+                                }
+                            },
+                            "professional": {
+                                "title": "Información profesional",
+                                "instruction": "Edite su información profesional de la compañía",
+                                "field": {
+                                    "title": "Su cargo o título"
+                                }
+                            }
+                        },
+                        "popup": {
+                            "success": {
+                                "title": "Listo!",
+                                "txt": "Datos guardados exotósamente"
+                            }
+                        }
+                    },
+                    "clinic": {
+                        "title": "Configuración de la Clínica",
+                        "section": {
+                            "private": {
+                                "title": "Acceso a la sala privada",
+                                "instructions": "Administra tu sala privada"
+                            },
+                            "shared": {
+                                "title": "Salas compartidas",
+                                "instructions": "Administra las salas compartidas",
+                                "search": "Buscar sala compartida",
+                                "table": {
+                                    "room_name": "Nombre de sala",
+                                    "created_by": "Creado por",
+                                    "users": "Usuarios",
+                                    "waiting_room": "Sala",
+                                    "room_history": "HIstoria de sala",
+                                    "settings": "Configuración",
+                                    "delete": "Borrar"
+                                },
+                                "button": {
+                                    "create": "Crear sala compartida"
+                                }
+                            },
+                            "popup": {
+                                "create": {
+                                    "title": "Crear nueva sala compartida",
+                                    "title2": "Editar sala compartida",
+                                    "field": {
+                                        "name": "Nombre corto de la sala",
+                                        "title": "Título de la sala"
+                                    }
+                                },
+                                "delete": {
+                                    "title": "Borrar sala compartida ${room.title}",
+                                    "txt": "Esta acción no se puede deshacer. ¿desea continuar?"
+                                },
+                                "delete_ok": {
+                                    "title": "Sala borrada",
+                                    "txt": "Se borró correctamente"
+                                },
+                                "users": {
+                                    "title": "Administrar usuarios de sala compartida"
+                                }
+                            },
+                            "user_permission": {
+                                "search": "Buscar usuario",
+                                "table": {
+                                    "user": "Usuario",
+                                    "email": "Correo",
+                                    "access": "Permiso"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "mail": {
+            "title": "Invitar por correo electrónico",
+            "subject": "Correo electrónico del paciente",
+            "subject_required": "El correo es requerido.",
+            "subject_invalid": "Correos inválidos",
+            "subject_limit": "Demasiados destinatarios",
+            "date": "Fecha",
+            "time": "Hora",
+            "language": "Idioma",
+            "text": "Invitación",
+            "btn_cancel": "Cancelar",
+            "btn_send": "Enviar Mensaje",
+            "alert_err_title": "Notificación",
+            "alert_err_text": "Por favor verifica los campos"
+        },
+        "intro": {
+            "btn_dont_show_again": "No mostrar denuevo",
+            "btn_accept": "Aceptar"
+        }
+    },
+    "chat": {
+        "popup_title": "Chat con ${name}",
+        "send_button": "Enviar",
+        "placeholder": "Escribe tu mensaje...",
+        "max_length": "Máximo se pueden escribir ${MAX_CHAT_LENGTH} caracteres"
+    },
+    "since": {
+        "seconds": "< 1 min",
+        "minutes": "${minutes} min",
+        "hours": "${hours} hora(s)"
+    },
+    "button": {
+        "ok": "Ok",
+        "yes": "Sí",
+        "no": "No",
+        "cancel": "Cancelar",
+        "accept": "Aceptar",
+        "apply": "Aplicar",
+        "save": "Guardar"
+    },
+    "popup": {
+        "verify": {
+            "title": "Por favor verifique",
+            "txt": "Algunos campos deben corregirse"
+        }
+    },
+    "pagination": {
+        "button": {
+            "previous": "Anterior",
+            "next": "Siguiente",
+            "page_size": "Tamaño de página"
+        }
+    },
+    "enum": {
+        "title": {
+            "dr": "Dr.",
+            "sr": "Sr.",
+            "sra": "Sra.",
+            "srta": "Srta.",
+            "mx": "Mx.",
+            "--": "--"
+        }
+    }
+}

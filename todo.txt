@@ -1,0 +1,24 @@
+
+Reliability
+
+Para asegurar que cuando un peer se desconecta toca:
+0. Inhabilitar la reconexión automatica que usa el socketId para decidir cuál de los dos peers
+   pide la reconeciṕon.
+1. El peer se debe dar cuenta que perdió la conexión con el servidor (socker disconnection).
+2. Cuando se conecta otra vez le debe notificar al servidor que regresó.
+2.b. cada peer debe poder dar razón del estado de la conexión con cualquier otro peer (el estado de los streams)
+3. El servidor por su parte debe tener:
+- La lista de todos los peers que hacen parte de una llamada.
+- Debe poder verificar el estado (por separado cada peer) de la conexión entre cuales quiera dos peers.
+- Debe poder pedir a cualquiera de los dos peers que inicie la conexión.
+- Periódicamente debe hacerse una verificación de cada peer en la llamada.
+
+https://help.doxy.me/en/articles/2427135-camera-and-microphone-permission-chrome
+https://www.samsung.com/sg/support/mobile-devices/how-to-manage-the-notifications-and-permissions-of-apps-through-settings-on-a-galaxy-phone/#:~:text=How%20to%20manage%20app%20permissions
+
+Add activity indicator after add a peer.
+Use volume voice meeter.
+
+Update sequence diagram
+Make sure a peer is removed after disconnection.
+Handle reconnection after lost internet.

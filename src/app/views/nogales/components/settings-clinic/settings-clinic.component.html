@@ -1,0 +1,132 @@
+<mat-accordion>
+    <mat-expansion-panel (opened)="updateState('private_room', true)" (closed)="updateState('', false)">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{ "room.base.settings.tabs.clinic.section.private.title" | translate:'nogales' | async
+                }}</mat-panel-title>
+            <mat-panel-description>{{ "room.base.settings.tabs.clinic.section.private.instructions" |
+                translate:'nogales' | async }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+            <form class="form-container layout_columna border_bottom" [formGroup]="formPrivateRoom">
+                <mat-form-field class="form-control">
+                    <mat-label>{{ "room.base.settings.tabs.clinic.section.user_permission.search" | translate:'nogales'
+                        | async }}</mat-label>
+                    <input matInput formControlName="search" type="text" (keyup.enter)="loadPrivateUsers(true)" />
+                    <button matSuffix mat-icon-button (click)="loadPrivateUsers(true)">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-form-field>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{ "room.base.settings.tabs.clinic.section.user_permission.table.user" |
+                                translate:'nogales' | async }}</th>
+                            <th>{{ "room.base.settings.tabs.clinic.section.user_permission.table.email" |
+                                translate:'nogales' | async }}</th>
+                            <th>{{ "room.base.settings.tabs.clinic.section.user_permission.table.access" |
+                                translate:'nogales' | async }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of getPrivateUsers()">
+                            <td>{{ "enum.title." + user.title | translate:'nogales' | async }} {{ user.name }}{{ user.middle_name ? ' '+user.middle_name : '' }}{{
+                                user.last_name ? ' '+user.last_name : '' }}</td>
+                            <td>{{ user.user_id }}</td>
+                            <td><mat-slide-toggle [(ngModel)]="user.permission_granted"
+                                    [ngModelOptions]="{standalone: true}"
+                                    (toggleChange)="updatePrivatePermission(user)"></mat-slide-toggle></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="bottom_buttons">
+                <app-pagination #private_user_pagination [list]="privateUsers" [(page)]="privateRoomUserPagination.page"
+                    [(pageSize)]="privateRoomUserPagination.limit" (pageSizeChange)="loadPrivateUsers(true)"
+                    (next)="loadPrivateUsers(false)" [lang]="'nogales'"></app-pagination>
+            </div>
+        </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="updateState('shared_room', true)" (closed)="updateState('', false)"
+        *ngIf="isUserInSomeGroup(['apps_videocall_admin'])">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{ "room.base.settings.tabs.clinic.section.shared.title" | translate:'nogales' | async
+                }}</mat-panel-title>
+            <mat-panel-description>{{ "room.base.settings.tabs.clinic.section.shared.instructions" | translate:'nogales'
+                | async
+                }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+            <form class="form-container layout_columna border_bottom" [formGroup]="formSharedRoom">
+                <mat-form-field class="form-control">
+                    <mat-label>{{ "room.base.settings.tabs.clinic.section.shared.search" | translate:'nogales' | async
+                        }}</mat-label>
+                    <input matInput formControlName="search" type="text" (keyup.enter)="loadSharedRoom(true)" />
+                    <button matSuffix mat-icon-button (click)="loadSharedRoom(true)">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-form-field>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{ "room.base.settings.tabs.clinic.section.shared.table.room_name" | translate:'nogales'
+                                | async
+                                }}</th>
+                            <th>{{ "room.base.settings.tabs.clinic.section.shared.table.created_by" |
+                                translate:'nogales' | async
+                                }}</th>
+                            <th>{{ "room.base.settings.tabs.clinic.section.shared.table.users" | translate:'nogales' |
+                                async
+                                }}</th>
+                            <th>{{ "room.base.settings.tabs.clinic.section.shared.table.waiting_room" |
+                                translate:'nogales' | async
+                                }}</th>
+                            <th>{{ "room.base.settings.tabs.clinic.section.shared.table.room_history" |
+                                translate:'nogales' | async
+                                }}</th>
+                            <th>{{ "room.base.settings.tabs.clinic.section.shared.table.settings" | translate:'nogales'
+                                | async
+                                }}</th>
+                            <th>{{ "room.base.settings.tabs.clinic.section.shared.table.delete" | translate:'nogales' |
+                                async
+                                }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let room of getSharedRooms()">
+                            <td class="room_ids"><span class="room_title">{{ room.title }}</span><span class="room_id"
+                                    (click)="copyRoomUrl()">/{{ room.room_id }}</span></td>
+                            <td>{{ room.owner }}</td>
+                            <td><mat-icon class="peque button_action"
+                                    (click)="manageRoomUsers(room)">person_add</mat-icon>
+                            </td>
+                            <td><mat-icon class="peque button_action"
+                                    (click)="redirectEditWaitingRoom()">edit_note</mat-icon></td>
+                            <td><mat-icon class="peque button_action"
+                                    (click)="showMeetingHistory(room)">history</mat-icon>
+                            </td>
+                            <td><mat-icon class="peque button_action"
+                                    (click)="manageRoomSettings(room)">settings</mat-icon>
+                            </td>
+                            <td><mat-icon class="peque button_action" (click)="deleteSharedRoom(room)">delete</mat-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="bottom_buttons">
+                    <app-pagination #shared_room_pagination [list]="sharedRooms" [(page)]="sharedRoomPagination.page"
+                        [(pageSize)]="sharedRoomPagination.limit" (pageSizeChange)="loadSharedRoom(true)"
+                        (next)="loadSharedRoom(false)" [lang]="'nogales'"></app-pagination>
+                </div>
+                <div class="bottom_buttons">
+                    <button class="button_general button_primary" mat-raised-button color="primary"
+                        (click)="createSharedRoom()">
+                        {{ "room.base.settings.tabs.clinic.section.shared.button.create" | translate:'nogales' |
+                        async
+                        }}
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

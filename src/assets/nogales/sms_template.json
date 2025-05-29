@@ -1,0 +1,10 @@
+{
+    "schedule": {
+        "es": "¡Hola! Me comunico de Nogales Psychological Counseling para confirmar su próxima cita virtual agendada para el día Martes 29 de Octubre a las 2:30pm. Por favor contestar este mensaje con un SI para confirmar su asistencia, en caso de no asistir favor de contestar NO. Si desea reagendar su cita o tiene alguna duda puede comunicarse a nuestra oficina al número (213) 384-7660. ¡Gracias!\n\nUtilice este enlace para acceder el día de su cita: https://casanogales.doxy.me/nogalespsych?l=es",
+        "en": "Hello, this is Nogales Psychological Counseling contacting you to confirm your upcoming virtual appointment tomorrow, Friday, January 24th at 12pm. Please reply YES if you will be attending or NO if you will not attend. You may call our office at (213) 384-7660 for more information or reschedule. Thank you!\n\nUse this link on the day of your appointment: https://casanogales.doxy.me/nogalespsych\n\nReply STOP to unsubscribe."
+    },
+    "reschedule": {
+        "es": "Buen día, me comunico de Nogales Psychological Counseling para informarle que su cita para el dia de hoy 03 Enero ha sido reagendada para el dia 28 de Febrero a las 4pm. Nos disculpamos por las molestias que esto pueda causar. Si desea reagendar su cita o tiene alguna duda puede comunicarse a nuestra oficina al número (213) 384-7660. ¡Gracias!",
+        "en": "Hello, this is Nogales Psychological Counseling contacting you to inform you that your upcoming virtual appointment has been rescheduled for Thursday, March 28th at 1:00 pm. Please reply YES if you will be attending or NO if you will not attend. You may call our office at (213) 384-7660 for more information or reschedule. Thank you!\n\nUse this link on the day of your appointment: https://casanogales.doxy.me/npc"
+    }
+}

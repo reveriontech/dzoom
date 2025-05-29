@@ -1,0 +1,42 @@
+FROM --platform=linux/x86_64 node:20
+
+RUN apt-get update && apt-get install wget -y
+RUN apt-get install -y openssh-server
+RUN apt-get install -y nano
+
+RUN npm install -g @angular/cli
+RUN npm install -g nodemon
+
+RUN mkdir -p /tmp/app
+
+WORKDIR /tmp/app
+COPY . ./
+
+RUN rm /tmp/app/package-lock.json
+RUN rm -rf /tmp/app/node_modules
+RUN npm install
+
+# Remove folders
+RUN rm -rf /tmp/app/flowcharts
+RUN rm -rf /tmp/app/src
+RUN rm -rf /tmp/app/srcJs
+RUN rm -rf /tmp/app/srv
+
+# Remove files
+RUN rm /tmp/app/app.mjs
+RUN rm /tmp/app/rundev.sh
+RUN rm /tmp/app/package.json
+
+
+RUN rm -rf /tmp/app/.git
+RUN rm -rf /tmp/app/.angular
+
+RUN mkdir /var/run/sshd
+RUN echo 'root:root123' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+EXPOSE 22
+EXPOSE 8080
+EXPOSE 8081
+
+CMD ["/usr/sbin/sshd", "-D"]

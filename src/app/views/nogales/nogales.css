@@ -1,0 +1,75 @@
+* {
+  --primary-background: rgb(125, 111, 111);
+  --primary-foreground: rgb(255, 255, 255);
+
+  --secondary-background: rgb(138, 123, 123);
+  --secondary-foreground: rgb(255, 255, 255);
+
+  font-family: ProximaNova, Montserrat, Helvetica Neue, sans-serif;
+}
+
+.material-icons {
+  font-family: "Material Icons";
+}
+
+.button_general {
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  padding: 0 16px;
+  text-align: center;
+  height: 48px;
+  line-height: 48px;
+  cursor: pointer;
+}
+
+.button_primary,
+.mat-mdc-raised-button:not(:disabled).button_primary {
+  background-color: var(--primary-background);
+  color: var(--primary-foreground) !important;
+}
+
+.button_primary_inverse {
+  color: var(--primary-background) !important;
+  background-color: var(--primary-foreground) !important;
+  border-color: var(--primary-foreground);
+  border: 1px solid;
+}
+
+.button_secondary {
+  background-color: var(--secondary-background);
+  color: var(--secondary-foreground) !important;
+}
+
+.text_normal {
+  font-size: 16px;
+  line-height: 24px;
+  color: #0f1821;
+}
+
+button.button_primary:disabled,
+button.button_primary[disabled] {
+  cursor: not-allowed;
+  background-color: rgba(138, 123, 123, 0.64);
+}
+
+.nogales_input_form {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  height: auto;
+  border: 1px solid #f4f6f5;
+}
+
+.container_popup header span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.container_popup p.guide span {
+  margin-bottom: 39px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0f1821;
+  font-style: normal;
+  font-weight: 400;
+}

@@ -1,0 +1,29 @@
+<div>
+    <pre>{{ socketId }} {{ connectionState }}</pre>
+    <pre>{{ mesageOverChannel }}</pre>
+    <!--button mat-raised-button color="" (click)="socketIoConnect()" type="button">SocketIO connect</button>
+    <button mat-raised-button color="" (click)="socketIoDisconnect()" type="button">SocketIO disconnect</button>
+    <button mat-raised-button color="" (click)="socketIoReconnect()" type="button">Reconnect</button-->
+    <select class="select_class" [(ngModel)]="currentDevices.speaker" (ngModelChange)="updateSpeaker()">
+        <option *ngFor="let c of devices.speaker" [ngValue]="c.id">{{c.txt}}</option>
+    </select>
+    <select class="select_class" [(ngModel)]="currentDevices.audio" (ngModelChange)="updateAudio()">
+        <option *ngFor="let c of devices.audios" [ngValue]="c.id">{{c.txt}}</option>
+    </select>
+    <select class="select_class" [(ngModel)]="currentDevices.video" (ngModelChange)="updateVideo()">
+        <option *ngFor="let c of devices.videos" [ngValue]="c.id">{{c.txt}}</option>
+    </select>
+    <button *ngIf="!inCall" mat-raised-button color="" (click)="startCall()" type="button">Call</button>
+    <button *ngIf="inCall" mat-raised-button color="" (click)="stopCall()" type="button">Hang</button>
+</div>
+<div class="peer_container">
+    <div *ngFor="let socketIdL of userList" class="one_peer" [ngClass]="{'invisible': socketIdL == socketId}">
+        <video autoplay class="remote_video" #remote_video [attr.data-socket-id]="socketIdL"></video>
+        <audio controls [ngInit]="updateSpeakerThis" #remote_audio [attr.data-socket-id]="socketIdL"></audio>
+        <button mat-raised-button color="" (click)="toggleStream(socketIdL)" type="button">Toggle Stream</button>
+    </div>
+    <!--p *ngFor="let row of log">{{ row }}</p-->
+</div>
+<div class="video-container">
+    <video autoplay muted class="local_video" #local_video></video>
+</div>

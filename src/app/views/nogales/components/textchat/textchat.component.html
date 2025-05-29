@@ -1,0 +1,37 @@
+<section class="message-chat">
+    <header>
+        <span class="toggle_container" (click)="closeRoom.emit()">
+            <mat-icon>close</mat-icon>
+        </span>
+        <span class="title" (click)="toggleOpenCloseChat.emit()">{{ getOtherName() }}</span>
+        <span class="toggle_container" (click)="toggleOpenCloseChat.emit()">
+            <mat-icon *ngIf="isOpened">expand_more</mat-icon>
+            <mat-icon *ngIf="!isOpened">expand_less</mat-icon>
+        </span>
+    </header>
+    <div #messages_list class="chat-content" *ngIf="isOpened">
+        <ul class="messages-list">
+            <li *ngFor="let message of messages; index as i; last as isLast"
+                [ngClass]="{'me': message.author.uid == getCurrentUserUID()}">
+                <span class="one">
+                    <p class="message">{{ message.text }}</p><br>
+                    <span class="date">{{ message.date | epoch2date }}</span>
+                </span>
+                <div *ngIf="isLast">{{scrollToBottom()}}</div>
+            </li>
+        </ul>
+    </div>
+    <div class="chat-form" *ngIf="isOpened">
+        <div class="textarea_container">
+            <textarea [disabled]="connectionState !== 'online'" class="form-control" rows="1" [(ngModel)]="messageText"
+                (keydown)="textAreaKeyDown($event)"
+                placeholder="{{ 'chat.placeholder' | translate:'nogales' | async }}"></textarea>
+            <p class="nogales_error" *ngIf="messageText.trim().length > MAX_CHAT_LENGTH">{{ "chat.max_length" |
+                translate:'nogales':self |
+                async }}</p>
+        </div>
+        <button [disabled]="connectionState !== 'online'" class="btn btn-primary btn-xs send_message"
+            [ngClass]="{'disabled': connectionState !== 'online' || (messageText.trim().length == 0 || messageText.trim().length > MAX_CHAT_LENGTH) }"
+            (click)="sendMessageLocal()">{{ "chat.send_button" | translate:'nogales' | async }}</button>
+    </div>
+</section>

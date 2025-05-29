@@ -1,0 +1,18 @@
+{
+    "subject": {
+        "en": "Telehealth meeting invitation from ${provider.name}",
+        "es": "Invitación de teleconferencia en la salud de ${provider.name}"
+    },
+    "rawText": {
+        "es": "¡Hola! ${provider.name} le invitó a unirse a una videollamada protegida.",
+        "en": "Hello, ${provider.name} has invited you to join a secure video call. "
+    },
+    "belowText": {
+        "en": "<a href=\"${url}\" target=\"_blank\">${url}</a>",
+        "es": "<a href=\"${url}\" target=\"_blank\">${url}</a>"
+    },
+    "template": {
+        "en": "/assets/nogales/invitation_email_en.html",
+        "es": "/assets/nogales/invitation_email_es.html"
+    }
+}

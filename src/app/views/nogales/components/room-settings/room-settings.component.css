@@ -1,0 +1,45 @@
+.contenedor_horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor_horizontal.end {
+    justify-content: end;
+}
+
+.padding_10 {
+    padding: 10px 0;
+}
+
+.padding_10_both {
+    padding: 10px;
+}
+
+.contenedor_vertical.centrado_ortho,
+.contenedor_horizontal.centrado_ortho {
+    align-items: center;
+}
+
+.contenedor_horizontal.centrado_ortho {
+    align-items: center;
+}
+
+.like_link {
+    color: gray;
+    cursor: pointer;
+}
+
+.like_link:hover {
+    color: black;
+}
+
+app-simple-tab,
+app-settings-profile,
+app-settings-clinic {
+    width: 100%;
+}
+
+.contenedor_horizontal.detail_container {
+    background-color: white;
+    padding: 10px;
+}

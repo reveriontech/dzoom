@@ -1,0 +1,35 @@
+.container_horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+.some_tab {
+    cursor: pointer;
+    font-size: 1.1em;
+    border-bottom: 1px solid #b2b2b2;
+}
+
+.some_tab.fill {
+    flex: 1;
+}
+
+.some_tab.active {
+    color: black;
+    border-bottom: 1px solid white;
+}
+
+.some_tab.active .small_tab {
+    background-color: white;
+}
+
+.some_tab .small_tab {
+    background-color: lightgray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 1px solid #b2b2b2;
+    border-left: 1px solid #b2b2b2;
+    border-right: 1px solid #b2b2b2;
+    padding: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+}

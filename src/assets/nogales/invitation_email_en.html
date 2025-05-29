@@ -1,0 +1,24 @@
+<div style="margin: 0 auto; max-width: 600px;font-family: Helvetica, Arial, sans-serif;">
+    <table>
+        <tbody>
+            <tr>
+                <h1>Invitation from ${provider.name}</h1>
+            </tr>
+            <tr>
+                <div
+                    style="max-width: 600px; background-color: #eef5f6; border-radius: 16px; padding: 10px 25px; word-break: break-word;">
+                    <p>${extra}</p>
+                    <a style="font-size: 14px; font-weight: 400; line-height: 18px; display: inline-block; padding: 10px 30px; border-radius: 6px; color: #ffffff; background-color: #8a7b7b; text-decoration: none;"
+                        href="${url}">Get In</a>
+                    <br />
+                    <br />
+                    $[if ${hasDate} == true]<p><span>${date}</span><span> a las </span><span>${time}</span></p>$[endif]
+                    <p style="background-color: rgb(162, 162, 162); height: 1px;"></p>
+                    <p>${below.changingThisBreaksApplicationSecurity}</p>
+                    <strong>Please do not reply this message, but if you need to communicate, contact <a
+                            href="mailto:${provider.email}">${provider.email}</a></strong>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+</div>

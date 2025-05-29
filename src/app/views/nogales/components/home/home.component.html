@@ -1,0 +1,39 @@
+<div class="component_vertical1">
+    <div class="top_container">
+        <a *ngIf="currentUser === null" class="button_general button_secondary button_login" (click)="login()">
+            <span>{{ "home.loginbutton" | translate:'nogales' | async }}</span>
+        </a>
+        <a *ngIf="currentUser !== null" class="button_general button_secondary button_login" (click)="logout()">
+            <span>{{ "home.logout" | translate:'nogales' | async }}</span>
+        </a>
+    </div>
+    <div class="middle_container">
+        <div class="middle_container2">
+            <div class="middle_container_left">
+
+            </div>
+            <form class="middle_container_right">
+                <p class="text_normal">{{ "home.guide" | translate:'nogales' | async }}</p>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>{{ "home.inputplaceholder" | translate:'nogales' | async }}</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let clinician of filteredOptions | async" [value]="clinician">
+                            {{clinician.txt}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <button [disabled]="!isSelectedProvider()" class="button_general button_primary button_enter"
+                    (click)="redirectToWaitingRoom()">{{
+                    "home.guidebutton"
+                    | translate:'nogales' | async }}</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer_container">
+
+    </div>
+</div>

@@ -1,0 +1,68 @@
+.container_popup {
+  display: flex;
+}
+
+.container_popup .izquierda {
+  flex: 1;
+  min-width: 0;
+  min-height: 348px;
+  padding: 34px 29px 8px;
+  box-sizing: border-box;
+}
+
+.container_popup form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container_popup .derecha {
+  position: relative;
+  width: 272px;
+  overflow: hidden;
+  border-radius: 0 4px 4px 0;
+  background-color: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+app-topcontrol {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+}
+
+video.mirrored {
+  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+}
+
+.input_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input_container input {
+  margin-bottom: 0;
+}
+
+.full_width {
+  flex: 1;
+}
+
+@media (max-width: 800px) {
+  .container_popup {
+    flex-direction: column-reverse;
+  }
+
+  .container_popup .derecha {
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+  }
+}

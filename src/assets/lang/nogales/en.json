@@ -1,0 +1,226 @@
+{
+    "home": {
+        "loginbutton": "Provider Login",
+        "guide": "Enter your clinician's room name:",
+        "inputplaceholder": "clinician's",
+        "guidebutton": "Enter Room",
+        "logout": "Logout"
+    },
+    "room": {
+        "popup1": {
+            "welcome": "Welcome!",
+            "guide": "Please check in below to let ${sharedState.provider.title} ${sharedState.provider.name} ${sharedState.provider.lastname} know you are here",
+            "inputplaceholder": "Enter your first and lastname",
+            "cta": "Check In",
+            "errors": {
+                "name_required": "The field above is required",
+                "max_name_length": "The user name should be shortest than ${MAX_USERNAME_LENGTH} characters"
+            }
+        },
+        "left": {
+            "patient_queue": "PATIENT QUEUE",
+            "patient_queue_connected": "PATIENT IN CALL",
+            "general": "GENERAL",
+            "available": "AVAILABLE",
+            "my_account": "My account",
+            "logout": "Logout",
+            "start_call": "Start call",
+            "end_call_with": "Hang up"
+        },
+        "panelright": {
+            "state": {
+                "off": "OFFLINE",
+                "on": "ONLINE"
+            },
+            "detail": {
+                "off": "Your call will start soon",
+                "on": "Your call will start soon"
+            }
+        },
+        "base": {
+            "welcome": "Welcome",
+            "invite_expl": "To invite someone to your waiting room, share this link:",
+            "invite": "Invite via",
+            "sms": "Text message",
+            "email": "Email",
+            "copy": "Copy",
+            "room": "Room",
+            "back": "Back to dashboard",
+            "edit_intro": {
+                "button": "Edit Intro",
+                "top": "Top Intro",
+                "bottom": "Bottom Intro",
+                "popup": "Pop Up Intro",
+                "instruction": "Edit section ${type} of room /${room}",
+                "set_default": "Use default",
+                "option": {
+                    "type_here": "Type here",
+                    "text": "Text",
+                    "image": "Image",
+                    "video": "Video"
+                },
+                "alerts": {
+                    "default_warn": {
+                        "title": "Warning",
+                        "txt": "The current intro content will be lost and the default content will be used. Continue?"
+                    },
+                    "": {
+                        "title": "Sure?",
+                        "txt": "Card will be deleted"
+                    }
+                }
+            },
+            "settings": {
+                "button": "Settings",
+                "tabs": {
+                    "profile": {
+                        "title": "Profile",
+                        "section": {
+                            "personal": {
+                                "title": "Personal information",
+                                "instruction": "Edit your personal information",
+                                "field": {
+                                    "title": "Title",
+                                    "name": "Name",
+                                    "middle_name": "Middle name",
+                                    "last": "Last name"
+                                }
+                            },
+                            "professional": {
+                                "title": "Professional information",
+                                "instruction": "Edit your company professional information",
+                                "field": {
+                                    "title": "Your position or title"
+                                }
+                            }
+                        },
+                        "popup": {
+                            "success": {
+                                "title": "Ready!",
+                                "txt": "Information stored sucessfully"
+                            }
+                        }
+                    },
+                    "clinic": {
+                        "title": "Clinic Settings",
+                        "section": {
+                            "private": {
+                                "title": "Your room access",
+                                "instructions": "Manage your private room"
+                            },
+                            "shared": {
+                                "title": "Shared Rooms",
+                                "instructions": "Manage your shared rooms",
+                                "search": "Search shared room",
+                                "table": {
+                                    "room_name": "Room name",
+                                    "created_by": "Created by",
+                                    "users": "Users",
+                                    "waiting_room": "Waiting room",
+                                    "room_history": "Room history",
+                                    "settings": "Settings",
+                                    "delete": "Delete"
+                                },
+                                "button": {
+                                    "create": "Create shared room"
+                                }
+                            },
+                            "popup": {
+                                "create": {
+                                    "title": "Create a new shared room",
+                                    "title2": "Edit shared room",
+                                    "field": {
+                                        "name": "Room's simple name",
+                                        "title": "Room's display title"
+                                    }
+                                },
+                                "delete": {
+                                    "title": "Delete shared room ${room.title}",
+                                    "txt": "This action can't be undone. Confirm?"
+                                },
+                                "delete_ok": {
+                                    "title": "Room deleted",
+                                    "txt": "Action done successfully"
+                                },
+                                "users": {
+                                    "title": "Manage shared room's users"
+                                }
+                            },
+                            "user_permission": {
+                                "search": "Search user",
+                                "table": {
+                                    "user": "User",
+                                    "email": "Email",
+                                    "access": "Access"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "mail": {
+            "title": "Invite by email",
+            "subject": "Patient email",
+            "subject_required": "The email is required",
+            "subject_invalid": "Invalid email",
+            "subject_limit": "Too many emails",
+            "date": "Date",
+            "time": "Time",
+            "language": "Language",
+            "text": "Invitation",
+            "btn_cancel": "Cancel",
+            "btn_send": "Send Email",
+            "alert_err_title": "Notification",
+            "alert_err_text": "Please verify the fields"
+        },
+        "intro": {
+            "btn_dont_show_again": "Don't show it again",
+            "btn_accept": "Accept"
+        }
+    },
+    "chat": {
+        "popup_title": "Chat with ${name}",
+        "send_button": "Send",
+        "placeholder": "Write your message...",
+        "max_length": "You have reached the maximum number of characters ${MAX_CHAT_LENGTH}"
+    },
+    "since": {
+        "seconds": "< 1 min",
+        "minutes": "${minutes} min",
+        "hours": "${hours} hour(s)"
+    },
+    "button": {
+        "ok": "Ok",
+        "yes": "Yes",
+        "no": "No",
+        "cancel": "Cancel",
+        "accept": "Accept",
+        "apply": "Apply",
+        "save": "Save"
+    },
+    "popup": {
+        "verify": {
+            "title": "Please verify",
+            "txt": "Some fields needs attention"
+        }
+    },
+    "pagination": {
+        "button": {
+            "previous": "Previous",
+            "next": "Next",
+            "page_size": "Page size"
+        }
+    },
+    "enum": {
+        "title": {
+            "dr": "Dr.",
+            "sr": "Mr.",
+            "sra": "Mrs.",
+            "srta": "Miss.",
+            "mx": "Mx.",
+            "null": "",
+            "--": "--"
+        }
+    }
+}

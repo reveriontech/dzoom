@@ -1,0 +1,17 @@
+<div mat-dialog-title>
+    <header>
+        <span></span>
+        <mat-icon class="peque manito" (click)="cancel()">close</mat-icon>
+    </header>
+</div>
+<mat-dialog-content class="mat-typography container_popup">
+    <app-room-intro [edit]="false" [list]="popUpIntro"></app-room-intro>
+</mat-dialog-content>
+<div class="bottom_buttons">
+    <button class="button_general button_primary_inverse" mat-raised-button color="" (click)="dontShowAgain()" type="button">
+        {{ "room.intro.btn_dont_show_again" | translate:'nogales' | async }}
+    </button>
+    <button class="button_general button_primary" mat-raised-button color="primary" (click)="cancel()">
+        {{ "room.intro.btn_accept" | translate:'nogales' | async }}
+    </button>
+</div>

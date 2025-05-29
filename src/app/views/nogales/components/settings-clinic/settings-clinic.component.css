@@ -1,0 +1,46 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom_buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button_action {
+    cursor: pointer;
+    color: gray;
+}
+
+.button_action:hover {
+    color: black;
+}
+
+.room_ids {
+    display: flex;
+    flex-direction: column;
+}
+
+.room_ids .room_title {
+    font-size: 1em;
+}
+
+.room_ids .room_id {
+    font-size: 0.9em;
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(0, 0, 81);
+}
+
+.room_ids .room_id:hover {
+    color: blue;
+}
+
+app-pagination {
+    width: 100%;
+}
