@@ -31,6 +31,8 @@ import { NogalesSrv } from "./srv/nogales/NogalesSrv.mjs";
 import { MyConstants } from "@ejfdelgado/ejflab-common/src/MyConstants.js";
 
 MyConstants.overwriteEnvVariables();
+MyConstants.NO_AUTO_PAGE_NAVITATION = ["/guides", "/assessment", "/check"];
+MyConstants.ANONYMOUS_PATHS = ['/uechat', '/call', '/nogales', "/check"];
 
 const options = {}
 let httpSrv = http;

@@ -10,7 +10,7 @@ npm install -g @angular/cli@18.0.7
 ## Add new application (only one time)
 
 ```
-ng generate module views/nogales --route assessment --module app.module
+ng generate module views/check --route assessment --module app.module
 ```
 
 ## Add new view

@@ -6,13 +6,8 @@
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
   "include": [
-    "src/app/views/imagiation/*.ts",
-    "src/app/views/gcp/*.ts",
-    "src/app/views/call/*.ts",
-    "src/app/views/home/*.ts",
-    "src/app/views/flowchart/*.ts",
     "src/app/views/nogales/*.ts",
-    "src/app/views/assessment/*.ts",
-    "src/app/views/guides/*.ts"
+    "src/app/views/check/*.ts",
+    "src/app/views/call/*.ts"
   ]
 }
