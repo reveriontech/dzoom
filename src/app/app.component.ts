@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { VideoWebStreamHook } from "./hooks/VideoWebStreamHook";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { Component, HostListener } from '@angular/core';
 export class AppComponent {
   constructor() {
     document.cookie = 'yo=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    VideoWebStreamHook.register();
   }
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {

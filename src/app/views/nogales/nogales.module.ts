@@ -71,7 +71,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     SettingsClinicComponent,
     PopupSharedroomUsersComponent,
     PopupSharedroomCreateComponent,
-    PaginationComponent
+    PaginationComponent,
   ],
   imports: [
     CommonModule,

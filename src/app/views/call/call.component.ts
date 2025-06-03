@@ -25,14 +25,14 @@ import {
   DevicesData,
   MultiScaleMediaStream,
   SelectedDeviceData,
-  //VideoWebStream,//edgar
+  VideoWebStream,//edgar
 } from 'ejflab-front-lib';
-//import { RTCCom } from 'ejflab-front-lib';//edgar
+import { RTCCom } from 'ejflab-front-lib';//edgar
 import { Subscription } from 'rxjs';
 import { UpdateUserListProcessor } from 'ejflab-front-lib';
 import { RemoveUserProcessor } from 'ejflab-front-lib';
-import { VideoWebStream } from "../../temporal/VideoWebStream";//edgar
-import { RTCCom } from "../../temporal/RTCCom";//edgar
+//import { VideoWebStream } from "../../temporal/VideoWebStream";//edgar
+//import { RTCCom } from "../../temporal/RTCCom";//edgar
 
 @Component({
   selector: 'app-call',
@@ -97,7 +97,9 @@ export class CallComponent extends BaseComponent implements OnInit {
     });
     this.socketIoConnect();
   }
-
+  override usePage(): boolean {
+    return false;
+  }
   override async ngOnInit() {
     await super.ngOnInit();
     this.reloadDevices();

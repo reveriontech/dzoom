@@ -33,9 +33,9 @@ import { NogalesUtiles } from '../../nogalesutiles';
 import { ModalService } from 'ejflab-front-lib';
 import {
   DevicesData,
-  //VideoWebStream,/edgar
+  VideoWebStream,//edgar
 } from 'ejflab-front-lib';
-//import { RTCCom } from 'ejflab-front-lib';//edgar
+import { RTCCom } from 'ejflab-front-lib';//edgar
 import { PopupconfigdevicesComponent } from '../popupconfigdevices/popupconfigdevices.component';
 import { StartCallData } from '../patient-queue-list/patient-queue-list.component';
 import { VideoCallComponent } from '../video-call/video-call.component';
@@ -48,8 +48,8 @@ import {
   StartVideoCallData
 } from './ChatManager.component';
 import { IntroManagerComponent } from './IntroManager.component';
-import { VideoWebStream } from "../../../../temporal/VideoWebStream";//edgar
-import { RTCCom } from "../../../../temporal/RTCCom";//edgar
+//import { VideoWebStream } from "../../../../temporal/VideoWebStream";//edgar
+//import { RTCCom } from "../../../../temporal/RTCCom";//edgar
 
 @Component({
   selector: 'app-waitingroom',

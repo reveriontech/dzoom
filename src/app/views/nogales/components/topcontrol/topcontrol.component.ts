@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import {
   DeviceOption,
-  //VideoWebStream,//edgar
+  VideoWebStream,//edgar
 } from 'ejflab-front-lib';
 import { IndicatorService } from 'ejflab-front-lib';
 import { MyConstants } from '@ejfdelgado/ejflab-common/src/MyConstants';
@@ -19,7 +19,7 @@ import {
   InMemoryState,
   SharedState,
 } from '../waitingroom/ChatManager.component';
-import { VideoWebStream } from "../../../../temporal/VideoWebStream";//edgar
+//import { VideoWebStream } from "../../../../temporal/VideoWebStream";//edgar
 
 @Component({
   selector: 'app-topcontrol',

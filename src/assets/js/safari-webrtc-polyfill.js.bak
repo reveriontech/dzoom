@@ -1,0 +1,114 @@
+/**
+ * Safari WebRTC Polyfill
+ * Provides compatibility for MediaStreamTrackProcessor and related APIs
+ * Load this script before your main application
+ */
+
+(function() {
+  'use strict';
+  
+  // Detect Safari/iOS
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || 
+                   /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  
+  if (isSafari) {
+    console.log('Safari detected - installing WebRTC polyfills');
+  }
+  
+  // MediaStreamTrackProcessor polyfill
+  if (typeof globalThis.MediaStreamTrackProcessor === 'undefined') {
+    console.log('Installing MediaStreamTrackProcessor polyfill');
+    
+    globalThis.MediaStreamTrackProcessor = class MediaStreamTrackProcessorPolyfill {
+      constructor(options = {}) {
+        this.track = options.track || null;
+        this.readable = new ReadableStream({
+          start(controller) {
+            console.log('MediaStreamTrackProcessor polyfill: stream started');
+          },
+          pull(controller) {
+            // No-op to prevent errors
+          },
+          cancel() {
+            console.log('MediaStreamTrackProcessor polyfill: stream cancelled');
+          }
+        });
+      }
+    };
+  }
+  
+  // VideoTrackGenerator polyfill
+  if (typeof globalThis.VideoTrackGenerator === 'undefined') {
+    console.log('Installing VideoTrackGenerator polyfill');
+    
+    globalThis.VideoTrackGenerator = class VideoTrackGeneratorPolyfill {
+      constructor() {
+        this.writable = new WritableStream({
+          write(chunk) {
+            // No-op to prevent errors
+          },
+          close() {
+            console.log('VideoTrackGenerator polyfill: closed');
+          },
+          abort(reason) {
+            console.log('VideoTrackGenerator polyfill: aborted', reason);
+          }
+        });
+        
+        // Create a minimal MediaStreamTrack-like object
+        this.track = {
+          kind: 'video',
+          id: 'polyfill-video-track',
+          label: 'Polyfill Video Track',
+          enabled: true,
+          muted: false,
+          readyState: 'live',
+          clone() { return this; },
+          stop() { console.log('Polyfill video track stopped'); },
+          addEventListener() {},
+          removeEventListener() {},
+          dispatchEvent() { return true; }
+        };
+      }
+    };
+  }
+  
+  // AudioTrackGenerator polyfill (if needed)
+  if (typeof globalThis.MediaStreamTrackGenerator === 'undefined') {
+    console.log('Installing MediaStreamTrackGenerator polyfill');
+    
+    globalThis.MediaStreamTrackGenerator = class MediaStreamTrackGeneratorPolyfill {
+      constructor(options = {}) {
+        this.kind = options.kind || 'video';
+        this.writable = new WritableStream({
+          write(chunk) {
+            // No-op to prevent errors
+          },
+          close() {
+            console.log('MediaStreamTrackGenerator polyfill: closed');
+          },
+          abort(reason) {
+            console.log('MediaStreamTrackGenerator polyfill: aborted', reason);
+          }
+        });
+        
+        // Create a minimal MediaStreamTrack-like object
+        this.track = {
+          kind: this.kind,
+          id: 'polyfill-' + this.kind + '-track',
+          label: 'Polyfill ' + this.kind + ' Track',
+          enabled: true,
+          muted: false,
+          readyState: 'live',
+          clone() { return this; },
+          stop() { console.log('Polyfill track stopped'); },
+          addEventListener() {},
+          removeEventListener() {},
+          dispatchEvent() { return true; }
+        };
+      }
+    };
+  }
+  
+  console.log('Safari WebRTC polyfills installed');
+})(); 

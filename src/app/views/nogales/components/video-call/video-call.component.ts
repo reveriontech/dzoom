@@ -19,7 +19,7 @@ import {
   DevicesData,
   MultiScaleMediaStream,
   SelectedDeviceData,
-  //VideoWebStream,
+  VideoWebStream,//edgar
   Wait,
 } from 'ejflab-front-lib';
 import { AuthService } from 'ejflab-front-lib';
@@ -30,7 +30,7 @@ import { FlowchartService } from 'ejflab-front-lib';
 import { ModalService } from 'ejflab-front-lib';
 import { TupleService } from 'ejflab-front-lib';
 import { WebcamService } from 'ejflab-front-lib';
-//import { RTCCom } from 'ejflab-front-lib';//edgar
+import { RTCCom } from 'ejflab-front-lib';//edgar
 import { EchoLogProcessor } from 'ejflab-front-lib';
 import { UpdateUserListProcessor } from 'ejflab-front-lib';
 import { RemoveUserProcessor } from 'ejflab-front-lib';
@@ -47,8 +47,8 @@ import { ReceiveLiveChangesProcessor } from 'ejflab-front-lib';
 import { SetModelProcessor } from 'ejflab-front-lib';
 import { ModuloSonido } from '@ejfdelgado/ejflab-common/src/ModuloSonido';
 import { PeerOnFrontContext } from './PeerOnFrontContext';
-import { VideoWebStream } from "../../../../temporal/VideoWebStream";//edgar
-import { RTCCom } from "../../../../temporal/RTCCom";//edgar
+//import { VideoWebStream } from "../../../../temporal/VideoWebStream";//edgar
+//import { RTCCom } from "../../../../temporal/RTCCom";//edgar
 
 
 @Component({

@@ -9,13 +9,13 @@ import {
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-//import { VideoWebStream } from 'ejflab-front-lib';//edgar
+import { VideoWebStream } from 'ejflab-front-lib';//edgar
 import {
   InMemoryState,
   SharedState,
 } from '../waitingroom/ChatManager.component';
 import { NogalesUtiles } from '../../nogalesutiles';
-import { VideoWebStream } from "../../../../temporal/VideoWebStream";//edgar
+//import { VideoWebStream } from "../../../../temporal/VideoWebStream";//edgar
 
 @Component({
   selector: 'app-popupwaitingroom',

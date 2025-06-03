@@ -3,10 +3,10 @@ import { SimpleObj } from '@ejfdelgado/ejflab-common/src/SimpleObj';
 import { MyThrottle } from '@ejfdelgado/ejflab-common/src/MyThrottle';
 import { 
     MultiScaleMediaStream, 
-    //RTCCom //edgar
+    RTCCom //edgar
 } from "ejflab-front-lib";
 import { ElementRef } from "@angular/core";
-import { RTCCom } from "../../../../temporal/RTCCom";//edgar
+//import { RTCCom } from "../../../../temporal/RTCCom";//edgar
 
 export abstract class PeerOnFrontContext
     extends VoiceDetectionContext {
