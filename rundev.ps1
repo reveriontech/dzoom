@@ -1,5 +1,8 @@
 # Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 # https://download.visualstudio.microsoft.com/download/pr/1754ea58-11a6-44ab-a262-696e194ce543/3642E3F95D50CC193E4B5A0B0FFBF7FE2C08801517758B4C8AEB7105A091208A/VC_redist.x64.exe
+
+#Unblock-File -Path "C:\Path\To\Your\Script.ps1"
+
 $env:MONGO_URI="localhost:27017"
 $env:MILVUS_URI="http://localhost:19530"
 $env:MINIO_URI="localhost:9000"
