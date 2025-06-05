@@ -58,7 +58,7 @@ const io = new Server(httpServer, {
     },
     cors: {
         //origin: "http://localhost:4200",
-        origin: "*",
+        origin: "https://dzoom.vercel.app", "https://localhost:4200",
         methods: ["GET", "POST", "DELETE"],
     }
 });
