@@ -82,6 +82,12 @@ export class NogalesSrv {
         app.delete('/srv/nogales/room/delete', [commonHeaders, checkAuthenticated, express.json(),
             handleErrorsDecorator(RoomSrv.delete)]);
 
+        app.get('/srv/nogales/room/user-permissions', [commonHeaders, 
+            //checkAuthenticated, 
+            //AuthorizationSrv.isUserInSomeGroup(["apps_videocall_admin", "apps_videocall_provider"]),
+            handleErrorsDecorator(RoomSrv.listRoomUserPermissions)]);
+
+
         // User Permissions
         app.get('/srv/nogales/user_room_permission/paginate', [commonHeaders, checkAuthenticated,
             AuthorizationSrv.isUserInSomeGroup(["apps_videocall_admin", "apps_videocall_provider"]),

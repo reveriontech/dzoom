@@ -29,6 +29,7 @@ import { MongoSrv } from "@ejfdelgado/ejflab-back/srv/MongoSrv.mjs";
 import { PostgresSrv } from "@ejfdelgado/ejflab-back/srv/PostgresSrv.mjs";
 import { NogalesSrv } from "./srv/nogales/NogalesSrv.mjs";
 import { MyConstants } from "@ejfdelgado/ejflab-common/src/MyConstants.js";
+import { PeersManagerProcessor } from "./srv/nogales/processors/PeersManagerProcessor.mjs"
 
 MyConstants.overwriteEnvVariables();
 MyConstants.NO_AUTO_PAGE_NAVITATION = ["/guides", "/assessment", "/check"];
@@ -140,6 +141,9 @@ NogalesSrv.configure(app);
 
 app.use("/", handleErrorsDecorator(MainHandler.handle));// Esto solo funciona sin el npm run angular
 
+SocketIOCall.registerHookProcessors(
+    { 'manage': PeersManagerProcessor }
+);
 io.on('connection', SocketIOCall.handle(io));
 
 // fuser 8081/tcp

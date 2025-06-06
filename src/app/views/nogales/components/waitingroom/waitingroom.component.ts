@@ -343,8 +343,8 @@ export class WaitingroomComponent
     super.ngOnInit();
     countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
     window.addEventListener("beforeunload", (event) => {
-      event.preventDefault();
-      event.returnValue = "";
+      //event.preventDefault();
+      //event.returnValue = "";
     });
     this.checkDevicePermission("camera" as PermissionName);
     this.checkDevicePermission("microphone" as PermissionName);
@@ -569,9 +569,17 @@ export class WaitingroomComponent
   }
 
   async loadRoomsInfo() {
-    const textRooms = await this.fileService.readPlainText(
-      `/assets/nogales/rooms.json`
-    );
+    console.log(`El login del usuario logeado: ${this.currentUser?.username}`);
+    const response = await this.httpSrv.get<any>(`/srv/nogales/room/user-permissions?user_id=${this.currentUser?.username}`);
+    console.log (response)
+    const textRooms = response.map ((registro:any)=>{
+      return {
+        "path": registro["room_id"],
+        "title": registro ["room_name"],
+        "shared": registro ["is_public"] == 1 
+      }
+    })
+    console.log (textRooms)
     this.roomGroups = [];
     const sharedGroup: RoomGroup = {
       name: 'SHARED ROOM(S)',
@@ -585,7 +593,7 @@ export class WaitingroomComponent
     };
     this.roomGroups.push(personalGroup);
     this.roomGroups.push(sharedGroup);
-    const parsed = JSON.parse(textRooms);
+    const parsed = (textRooms);
     for (let i = 0; i < parsed.length; i++) {
       const part = parsed[i];
       const { path, title, shared } = part;

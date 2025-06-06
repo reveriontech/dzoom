@@ -19,14 +19,14 @@ function scaleSource(sw: number, sh: number, dw: number, dh: number) {
 
 // Utility function to detect Safari
 function isSafari(): boolean {
-    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || 
-           /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
+        /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
 // Check if MediaStreamTrackProcessor is native (not polyfilled)
 function isNativeMediaStreamTrackProcessor(): boolean {
-    return typeof MediaStreamTrackProcessor !== 'undefined' && 
-           !MediaStreamTrackProcessor.toString().includes('Polyfill');
+    return typeof MediaStreamTrackProcessor !== 'undefined' &&
+        !MediaStreamTrackProcessor.toString().includes('Polyfill');
 }
 
 export class VideoWebStreamHook {
@@ -49,12 +49,33 @@ export class VideoWebStreamHook {
             }
         }
         try {
+            const urlParams = new URLSearchParams(window.location.search);
             const constraintsVideo = {
-                video: { deviceId: videoSource ? { exact: videoSource } : undefined },
+                video: {
+                    deviceId: videoSource ? { exact: videoSource } : undefined,
+                },
             };
+
+            if (urlParams.get("test") == "yes") {
+                (constraintsVideo.video as any).frameRate = {
+                    ideal: 15, //fps
+                    max: 20, //fps
+                };
+            }
+            console.log(JSON.stringify(constraintsVideo, null, 4));
+
+            // Define audio constraints with noise suppression enabled
             const constraintsAudio = {
-                audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
+                audio: {
+                    deviceId: audioSource ? { exact: audioSource } : undefined,
+
+                    // ✅ Added noise suppression settings
+                    noiseSuppression: true,
+                    echoCancellation: true,
+                    autoGainControl: true
+                }
             };
+            console.log(JSON.stringify(constraintsAudio, null, 4));
             const stream = await navigator.mediaDevices.getUserMedia(
                 constraintsVideo
             );
@@ -67,6 +88,8 @@ export class VideoWebStreamHook {
             await self.waitUntilActive(streamAudio);
 
             const videoTrack: any = stream.getVideoTracks()[0];
+            const settings = videoTrack.getSettings();
+            console.log('Actual video frame rate:', settings.frameRate);
             const { width, height } = videoTrack.getSettings();
 
             let processedStream: MediaStream;
@@ -74,7 +97,7 @@ export class VideoWebStreamHook {
             // Check if we can use native MediaStreamTrackProcessor
             if (isNativeMediaStreamTrackProcessor() && !isSafari()) {
                 console.log('Using native MediaStreamTrackProcessor for video processing');
-                
+
                 // https://mediastreamtrack.glitch.me/script.js
                 const trackProcessor = new MediaStreamTrackProcessor({
                     track: videoTrack,
@@ -127,6 +150,7 @@ export class VideoWebStreamHook {
                 processedStream = stream.clone();
             }
 
+            // ✅ Return final media stream including audio with noise suppression
             const response: MultiScaleMediaStream = {
                 big: stream,
                 small: processedStream,
@@ -134,7 +158,6 @@ export class VideoWebStreamHook {
             };
             self.streams = response;
             self.emitterStreams.emit(response);
-
             self.lastUpdatedVideoDevice = videoSource;
             self.lastUpdatedAudioDevice = audioSource;
 

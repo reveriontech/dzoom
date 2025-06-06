@@ -18,7 +18,7 @@ export class PopupSharedroomUsersComponent implements OnInit {
   throttle = new MyThrottle(100, false);
   resetPaging: boolean = true;
   pagination: PaginationData = {
-    limit: 1,
+    limit: 10,
     offset: 0,
     direction: 'DESC',
     orderColumn: 'name',

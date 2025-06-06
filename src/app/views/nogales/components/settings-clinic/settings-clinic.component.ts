@@ -38,14 +38,14 @@ export class SettingsClinicComponent implements OnInit, OnDestroy {
     sharedLoaded: false,
   };
   sharedRoomPagination: PaginationData = {
-    limit: 1,
+    limit: 10,
     offset: 0,
     direction: 'DESC',
     orderColumn: 'created',
     page: 0,
   };
   privateRoomUserPagination: PaginationData = {
-    limit: 1,
+    limit: 10,
     offset: 0,
     direction: 'DESC',
     orderColumn: 'name',

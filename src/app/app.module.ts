@@ -58,7 +58,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     provideStorage(() => getStorage()),
     // Provide a value to be used by Angular's dependency injection
     // machanism to pass 
-    { provide: 'appVersion', useValue: '1.17.2' },
+    { provide: 'appVersion', useValue: '1.17.5' },
     { provide: 'authProvider', useValue: 'microsoft' },
     { provide: 'msTenant', useValue: 'e03b8fb1-7e35-4dab-ae1e-aa681402dbf2' },
     { provide: 'msClientId', useValue: '4c1062f0-7409-4597-9eac-21b87ac6005e' },

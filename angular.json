@@ -48,8 +48,6 @@
               "@tensorflow/tfjs",
               "@tensorflow/tfjs-vis",
               "@ricky0123/vad-web",
-              "src/app/mycommon/services/flowchart.service",
-              "src/app/mycommon/services/minio.service",
               "@ejfdelgado/ejflab-common/src/sortify",
               "@ejfdelgado/ejflab-common/src/MyThrottle",
               "@ejfdelgado/ejflab-common/src/MyTemplate",
@@ -70,7 +68,8 @@
               "@ejfdelgado/ejflab-common/src/CollisionsEngine",
               "@ejfdelgado/ejflab-common/src/FlowChartDiagram",
               "@ejfdelgado/ejflab-common/src/SimpleObj",
-              "@ejfdelgado/ejflab-common/src/MyCookies"
+              "@ejfdelgado/ejflab-common/src/MyCookies",
+              "srcJs/PeerOrchestrator"
             ]
           },
           "configurations": {

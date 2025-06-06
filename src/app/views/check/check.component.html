@@ -1,1 +1,5 @@
-<p>check works!</p>
+<div class="padding_10">
+    <button (click)="allRooms()">All Rooms</button>
+    <button (click)="roomDetail()">Room Detail</button>
+    <pre *ngIf="orchestratorData">{{ orchestratorData[focusRoom] | json }}</pre>
+</div>

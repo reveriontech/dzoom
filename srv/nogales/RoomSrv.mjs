@@ -113,4 +113,19 @@ export class RoomSrv {
             rowsUpdated: databaseResponse.rowCount,
         });
     }
+
+    static async listRoomUserPermissions(req, res, next) {
+       
+        const user_id = General.readParam(req, "user_id", null);
+       
+
+        const model = {
+            user_id,
+           
+        };
+
+        const databaseResponse = await PostgresSrv.executeFile("srv/nogales/sql/read/room_user_permissions.sql", model);
+        res.status(200).send(databaseResponse.rows);
+    }
+
 }

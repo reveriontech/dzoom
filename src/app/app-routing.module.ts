@@ -22,7 +22,6 @@ IMPORTANTE: Cuando agregue un módulo acá, debe modificar tsconfig.app.json
 Ver MyConstants.js static ANONYMOUS_PATHS = ['/uechat'];
 */
 const PAGINAS = [
-  { id: 'call', module: 'CallModule' },
   { id: 'check', module: 'CheckModule' },
   { id: 'nogales', module: 'NogalesModule' },
 ];

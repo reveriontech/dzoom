@@ -17,6 +17,7 @@ import { MicrosoftAuthService, UserMicrosoft } from 'ejflab-front-lib';
 import { ModalService } from 'ejflab-front-lib';
 import { MyCookies } from '@ejfdelgado/ejflab-common/src/MyCookies';
 import { ClinicianData } from './components/home/home.component';
+import { IndicatorService } from 'ejflab-front-lib';
 import {
   WaitingroomComponent,
 } from './components/waitingroom/waitingroom.component';
@@ -77,7 +78,8 @@ export class NogalesComponent
     public route: ActivatedRoute,
     public override modalService: ModalService,
     public override cdr: ChangeDetectorRef,
-    private httpSrv: HttpService
+    private httpSrv: HttpService,
+    private indicatorSrv: IndicatorService
   ) {
     super(flowchartSrv, callService, authSrv, modalService, cdr);
   }
@@ -203,7 +205,19 @@ export class NogalesComponent
     });
   }
 
+  showActivityIndicator(millis=1500) {
+    const promise = this.indicatorSrv.start();
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(null);
+      }, millis);
+    }).then(() => {
+      promise.done();
+    });
+  }
+
   openVideoChat(detail: StartVideoCallData) {
+    this.showActivityIndicator();
     const callRoomName = detail.roomName;
     const emitRequest = {
       uuid: detail.peerUUID,
@@ -214,6 +228,7 @@ export class NogalesComponent
   }
 
   closeVideoChat(detail: StartVideoCallData) {
+    this.showActivityIndicator();
     const callRoomName = detail.roomName;
     const emitRequest = {
       uuid: detail.peerUUID,

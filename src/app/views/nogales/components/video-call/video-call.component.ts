@@ -99,9 +99,6 @@ export class VideoCallComponent
 
   throttle = new MyThrottle(1000, false);
   // Take into account last invocation
-
-  forceRefresh: boolean = false;
-  forceRefreshAll: boolean = false;
   stopingCall: boolean = false;
 
   constructor(
@@ -198,10 +195,15 @@ export class VideoCallComponent
   checkState() {
     this.adjustView();
     if (this.streamWatcherBool && this.conectionWatcherBool) {
-      console.log('Fire fixAllConnections');
+      console.log("rtcDetail: checkState fire fixAllConnections");
+      // Esta listo:
+      // - El stream que este peer va a ofrecer.
+      // - La conexion socket al servidor
       this.playSound('success2.mp3', false, 0.2);
       this.isInCall.emit(true);
-      this.fixAllConnections();
+      if (!this.isProvider()) {
+        this.fixAllConnections();
+      }
       // Only do this if screen is small
       //this.closeLeftMenu();
     }
@@ -279,7 +281,10 @@ export class VideoCallComponent
       await this.waitUntilElementsReady();
 
       this.onStatusChangeSubscription = RTCCom.onStatusChange(() => {
+        // Some of the RTC connections changes (succeed/failure)
         this.cdr.detectChanges();
+        // Update peer state
+        this.updateMyLiveModel();
       });
 
       this.videoManagerStreamSubscription =
@@ -318,6 +323,7 @@ export class VideoCallComponent
   }
 
   async videoCallDisconnect() {
+    RTCCom.disconnectAll();
     await this.socketIoDisconnect();
   }
 
@@ -416,6 +422,7 @@ export class VideoCallComponent
   }
 
   async reloadConnection(socketId: string) {
+    console.log(`rtcDetail: reloadConnection(${socketId})`);
     await RTCCom.closeChannelWith(socketId);
     setTimeout(async () => {
       await RTCCom.openChannelWith(socketId, ['text']);
@@ -441,10 +448,7 @@ export class VideoCallComponent
         // Patient just disconnect
         this.videoCallDisconnect();
       }
-      for (let i = 0; i < this.userList.length; i++) {
-        const socketIdL = this.userList[i];
-        RTCCom.closeChannelWith(socketIdL);
-      }
+      RTCCom.disconnectAll();
       this.isInCall.emit(this.displayVideoCall);
       this.stopCallAction.emit();
       this.playSound('hangdown.mp3', false, 0.1);
@@ -477,15 +481,33 @@ export class VideoCallComponent
         `data.people.${socketId}.sharedState.uuid`,
         uuid
       );
-      const myData = SimpleObj.getValue(
+      const sharedState = SimpleObj.getValue(
         this.livemodel,
         `data.people.${socketId}.sharedState`,
         {}
       );
-      myData.micState = this.sharedState.micState;
-      myData.videoState = this.sharedState.videoState;
-      myData.name = name;
-      this.trackChanges(['data', 'data.people', `data.people.${socketId}`]);
+      sharedState.socket = socketId;
+      sharedState.micState = this.sharedState.micState;
+      sharedState.videoState = this.sharedState.videoState;
+      sharedState.name = name;
+
+      const listChangedPaths = [
+        'data',
+        'data.people',
+        `data.people.${socketId}`,
+        `data.people.${socketId}.sharedState`,
+        `data.people.${socketId}.sharedState.peers`,
+      ];
+      // Go throw peers and check health
+      const peers: any = {};
+      this.userList.forEach((peerSocketId: string) => {
+        if (socketId != peerSocketId) {
+          const isHealthy = RTCCom.isHealthyConnection(peerSocketId);
+          peers[peerSocketId] = isHealthy;
+        }
+      });
+      sharedState.peers = peers;
+      this.trackChanges(listChangedPaths);
     }
   }
 
@@ -568,6 +590,7 @@ export class VideoCallComponent
       this.updateMyLiveModel();
       // Set up the RTC channel
       await RTCCom.init(instance);
+      /*
       RTCCom.mustUpdate.subscribe(async () => {
         if (this.displayVideoCall && !this.stopingCall) {
           // Try reconection!
@@ -576,6 +599,7 @@ export class VideoCallComponent
           this.fixAllConnections();
         }
       });
+      */
       if (this.onDataChanelSubscription) {
         this.onDataChanelSubscription.unsubscribe();
       }
@@ -597,10 +621,12 @@ export class VideoCallComponent
     instance.registerProcessor('updateUserList', (message: any) => {
       new UpdateUserListProcessor(this).execute(message);
       // Fire fix connections
-      this.fixAllConnections();
+      //this.fixAllConnections();
+      this.updateMyLiveModel();
     });
     instance.registerProcessor('removeUser', (message: any) => {
       new RemoveUserProcessor(this).execute(message);
+      this.updateMyLiveModel();
     });
     instance.registerProcessor('closeVideoChat', async (message: any) => {
       //console.log(`closeVideoChat ${JSON.stringify(message)}`);
@@ -816,24 +842,19 @@ export class VideoCallComponent
 
   sourceChanged() {
     // Some video or audio source had changed, so force reopen RTCP Connection
-    this.fixAllConnections(true, true);
+    console.log("rtcDetail: sourceChanged fire fixAllConnections");
+    this.fixAllConnections();
   }
 
-  fixAllConnections(force: boolean = false, forceAll: boolean = false) {
+  fixAllConnections() {
     if (!this.displayVideoCall) {
       return;
     }
-    if (force) {
-      this.forceRefresh = true;
-    }
-    if (forceAll) {
-      this.forceRefreshAll = true;
-    }
-    this.throttle.throttle(this.fixAllConnectionsInternal.bind(this));
+    this.throttle.throttle(this.rebuildConections.bind(this));
   }
 
-  async fixAllConnectionsInternal() {
-    console.log('fixAllConnections...');
+  async rebuildConections() {
+    console.log('rtcDetail: fixAllConnections...');
     const activityIndicator = this.indicatorSrv.start();
     const promesas = [];
     const instance = this.getCallServiceInstance();
@@ -847,23 +868,15 @@ export class VideoCallComponent
       const peerSocketId = this.userList[i];
       if (socketId !== peerSocketId) {
         // Only if it is different from me with myself
-        if (this.forceRefreshAll || this.forceRefresh || !RTCCom.isHealthyConnection(peerSocketId)) {
-          if (socketId > peerSocketId || this.forceRefreshAll) {
-            promesas.push(this.reloadConnection(peerSocketId));
-            console.log(`Conection with ${peerSocketId} reloading!`);
-          } else {
-            console.log(
-              `Conection with ${peerSocketId} ignored to avoid collision...`
-            );
-          }
+        if (!RTCCom.isHealthyConnection(peerSocketId)) {
+          promesas.push(this.reloadConnection(peerSocketId));
+          console.log(`Conection with ${peerSocketId} reloading!`);
         } else {
-          console.log(`Conection with ${peerSocketId} is OK`);
+          console.log(`Conection with ${peerSocketId} is already OK, dismiss.`);
         }
       }
     }
     await Promise.all(promesas);
-    this.forceRefresh = false;
-    this.forceRefreshAll = false;
     activityIndicator.done();
     console.log('fixAllConnections... OK');
   }
